@@ -1,65 +1,50 @@
 @extends('layouts.master')
 
-<!-- NavBar -->
+<head>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Login Page</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    @section('style')
+    <link href="/css/reg-login.css" rel="stylesheet">
+    @endsection
 
-    <div class="collapse navbar-collapse" id="navbarColor03">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="LoginPage.html">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Help</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+</head>
 
 <!-- **************************************************************************************************************** -->
 
 @section('content')
+<div class="container">
 <!-- Image -->
-<div class="form-group container col-10">
-    <p>
-
-
-    </p>
-<img src="Logo.png" style="width:550px;height:550px; float:right">
+<div class="text-center form-group container mt-2 mb-5">
+        <div class="form-group container">
+            <h3 style="color: #71b346"><strong>Welcome To</strong></h3>
+        </div>
+<img src="images/Logo.png" style="width:300px;height:300px;">
 </div>
 <!-- **************************************************************************************************************** -->
 
+
+<div class="container text-center mt-5">
 <!-- Input For Login -->
-<form>
-    <p>
+<form class="form-sr" action="/manager/storeManagerSession" method="POST" enctype="multipart/form-data">
+    {{ csrf_field() }}
 
 
-    </p>
-    <fieldset>
-        <div class="form-group container">
-            <legend>Welcome To Cybertronix please Sign In</legend>
-        </div>
-        <p>
-
-        </p>
-        <div class="form-group container ">
-            <label for="EmpLoginNum">Emplyee Number</label>
-            <input type="Text" class="form-control" id="EmpLoginNum" placeholder="Employee Number">
+        <div class="form-sr">
+            <h5 for="username" style="color: #71b346">Enter Username</h5>
+            <input type="Text" class="form-control" id="username" name="password" placeholder="Username" required>
         </div>
 
-        <div class="form-group container">
-            <label for="EmpLoginPassword">Enter Password</label>
-            <input type="password" class="form-control" id="EmpLoginPassword" placeholder="Password">
+        <div class="form-sr">
+            <h5 for="password" style="color: #71b346">Enter Password</h5>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
         </div>
 
         <!--Sign In Button -->
-        <div class="form-group container ">
-            <a href="EmployeeHomePage.html" class="btn btn-outline-success" role="button">Sign In</a>
+        <div class="form-sr mt-3">
+            <button class="btn btn-lg btn-block btn-secondary" type="submit">Sign In</button>
         </div>
-        <p>
-        </p>
+
+        <a href="/register" style="color: #71b346">Register</a>
+</form>
+</div>
+</div>
 @endsection

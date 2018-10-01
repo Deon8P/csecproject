@@ -1,7 +1,15 @@
 @extends('layouts.master')
 
-<!-- NavBar -->
+<head>
 
+    @section('style')
+
+    @endsection
+
+</head>
+
+@section('nav')
+<!-- NavBar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Admin / Edit Leave Type</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,14 +24,15 @@
             <li class="nav-item">
                 <a class="nav-link" href="LoginPage.html">Logout</a>
             </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <a href="AdminHomePage.html" class="btn btn-outline-danger" role="button">Cancel</a>
+        </ul>e-danger" role="button">Cancel</a>
         </form>
+        <form class="form-inline my-2 my-lg-0">
+            <a href="AdminHomePage.html" class="btn btn-outlin
     </div>
 </nav>
-
 <!-- **************************************************************************************************************** -->
+@endsection
+
 @section('content')
 
 <!--Table to edit Leave-->
