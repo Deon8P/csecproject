@@ -1,27 +1,5 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+@extends('layouts.master')
 
-    <!--  jQuery -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-    <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
-    <link rel="StyleSheet" type="text/css" href="StyleSheet.css">
-
-    <!-- Bootstrap Date-Picker Plugin -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-    <link rel="StyleSheet" type="text/css" href="StyleSheet.css">
-
-
-
-</head>
-
-<body>
 
 <!-- NavBar -->
 
@@ -53,6 +31,8 @@
 </nav>
 
 <!-- **************************************************************************************************************** -->
+@section('content')
+
 <!-- Image -->
 <div class="form-group container col-12">
     <p>
@@ -160,7 +140,4 @@
 </form>
 
 <!-- **************************************************************************************************************** -->
-<link rel="StyleSheet" type="text/css" href="StyleSheet.css">
-
-</body>
-</html>
+@endsection

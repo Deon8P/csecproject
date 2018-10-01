@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
-</head>
-<body>
-    
+@extends('layouts.master')
+
+@section('content')
 <div class="container">
 	<div class="text-center">
 
@@ -22,7 +13,6 @@
 				<input type="text" class="form-control transition-fade" id="name" name="name" placeholder="name" required>
 			</div>
 
-        
 			<div class="form-sr">
 				<label for="surname" class="text-muted">surname</label>
 				<input type="text" class="form-control transition-fade" id="surname" name="surname" placeholder="surname" required>
@@ -53,5 +43,4 @@
 		</form>
 	</div>
 </div>
-</body>
-</html>
+@endsection
