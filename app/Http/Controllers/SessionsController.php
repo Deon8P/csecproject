@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Console\Presets\React;
+use App\User;
 
 class SessionsController extends Controller
 {
@@ -16,15 +19,15 @@ class SessionsController extends Controller
         return view('sessions.create');
     }
 
-    public function storeEmployeeSession(request $request)
+    public function storeEmployeeSession()
     {
         $this->validate(request(), [
-            'username' => 'required',
+            'username' => 'required|exists:employees,user-username',
             'password' => 'required|min:6'
         ]);
 
         // Attempt user authentication
-        if (!auth()->attempt(['username' => $username, 'password' => $password])) {
+        if (!auth()->attempt(request(['username', 'password']))) {
             redirect('login')->withErrors([
                 'message' => 'Please check your credentials and try again'
             ]);
@@ -35,15 +38,15 @@ class SessionsController extends Controller
         return redirect('employee');
     }
 
-    public function storeManagerSession(request $request)
+    public function storeManagerSession(Request $request)
     {
         $this->validate(request(), [
-            'username' => 'required',
+            'username' => 'required|exists:managers,user-username',
             'password' => 'required|min:6'
         ]);
 
         // Attempt user authentication
-        if (!auth()->attempt(['username' => $username, 'password' => $password])) {
+        if (! auth()->attempt(request(['username', 'password']))) {
             redirect('login')->withErrors([
                 'message' => 'Please check your credentials and try again'
             ]);

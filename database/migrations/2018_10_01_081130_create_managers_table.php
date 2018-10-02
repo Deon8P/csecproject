@@ -17,6 +17,7 @@ class CreateManagersTable extends Migration
 
         Schema::create('managers', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('user-username');
             $table->string('name');
             $table->string('surname');
             $table->timestamps();
@@ -24,7 +25,7 @@ class CreateManagersTable extends Migration
 
         Schema::table('managers', function(Blueprint $table)
         {
-            $table->foreign('id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user-username')->references('username')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
 
     }

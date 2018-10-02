@@ -11,7 +11,7 @@
 @section('nav')
 <!-- NavBar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Admin / Create Employee</a>
+    <a class="navbar-brand" href="#">Manager/Create Employee</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -25,110 +25,60 @@
                 <a class="nav-link" href="LoginPage.html">Logout</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-                <a href="AdminHomePage.html" class="btn btn-outline-danger" role="button">Cancel</a>
-        </form>
     </div>
 </nav>
 <!-- **************************************************************************************************************** -->
 @endsection
 
 @section('content')
-<!-- Image -->
-<div class="form-group container col-12">
-    <p>
-
-
-    </p>
-    <img src="Logo.png" style="width:550px;height:550px; float:right">
-</div>
-<!-- **************************************************************************************************************** -->
 <!-- Input For Creating Employee -->
-<form>
-    <p>
+<form class="form-sr" method="POST" action="/register/employee" enctype="multipart/form-data">
+        {{ csrf_field() }}
 
-
-    </p>
-    <fieldset>
         <div class="form-group container">
-            <legend>Create New Employee</legend>
+            <h1>Create New Employee</h1>
         </div>
-        <p>
 
-        </p>
         <div class="form-group container ">
-            <label for="EmployeeName">Name</label>
-            <input type="Text" class="form-control" id="EmployeeName" placeholder="Enter your name here">
+            <label for="name">Name</label>
+            <input type="Text" class="form-control" id="name" name="name" placeholder="Enter employee name" required>
         </div>
+
         <div class="form-group container ">
-            <label for="EmployeeSurnmae">Surname</label>
-            <input type="Text" class="form-control" id="EmployeeSurnmae" placeholder="Enter your surname here">
+            <label for="surname">Surname</label>
+            <input type="Text" class="form-control" id="surname" name="surname" placeholder="Enter employee surname" required>
         </div>
+
         <div class="form-group container">
-            <label for="EmployeeID">Identification Number</label>
-            <input type="Text" class="form-control" id="EmployeeID" placeholder="Enter your ID here">
-        </div>
-        <div class="form-group container">
-            <label for="EmployeeNumber">Employee Number</label>
-            <input type="Text" class="form-control" id="EmployeeNumber" placeholder="Enter your employee number here">
+            <label for="username">Employee username</label>
+            <input type="Text" class="form-control" id="username" name="username" placeholder="Enter your employee username" required>
         </div >
 
         <div class="form-group container">
-            <label for="EmployeePassword">Create Password</label>
-            <input type="password" class="form-control" id="EmployeePassword" placeholder="Password">
+                <label for="email">Employee email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your employee email" required>
+            </div >
+
+        <div class="form-group container">
+            <label for="password">Create password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
         </div>
 
         <div class="form-group container">
-            <label for="EmployeePasswordConfirm">Confirm Password</label>
-            <input type="password" class="form-control" id="EmployeePasswordConfirm" placeholder="Confirm Password">
+            <label for="password_confirmation">Password confirmation</label>
+            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Password confirmation" required>
         </div>
 
         <div class="form-group container">
-            <label>Date Of Employment</label>
-        </div>
-        <div class="form-group container">
-            <input id="datepicker" width="270" />
-            <script>
-                $('#datepicker').datepicker({
-                    uiLibrary: 'bootstrap'
-                });
-            </script>
-        </div>
-        <div class="form-group container">
-            <label for="EmployeeDept">Employee Department</label>
-            <input type="Text" class="form-control" id="EmployeeDept" placeholder="Enter your department name here">
-        </div >
-        <div class="form-group container">
-            <label for="EmployeeManager">Employee Manager/supervisor</label>
-            <input type="Text" class="form-control" id="EmployeeManager" placeholder="Enter your Manager name here">
-        </div >
-        <!--Drop DownList -->
-        <div class="form-group container">
-            <label>Please Select Employee Type</label>
-        </div >
+                <label for="leave_balance">Leave balance</label>
+                <input type="number" min="15" max="40" class="form-control" id="leave_balance" name="leave_balance" placeholder="Leave Balance (Default 30 days)" required>
+            </div>
 
-        <div class="form-group container">
-            <select class="custom-select">
-                <option selected="">Select</option>
-                <option value="1">Cleaner</option>
-                <option value="2">Admin</option>
-                <option value="3">Manager</option>
-                <option value="3">Worker</option>
-
-            </select>
-        </div>
-
-
-            <!--Create Button -->
+         <!--Create Button -->
         <div class="form-group container ">
-
-            <a href="AdminHomePage.html" class="btn btn-outline-success" role="button">Create</a>
-        </div>
-        <p>
-
-
-        </p>
-    </fieldset>
+            <button type="submit" class="btn btn-secondary transition-fade text-light btn-block mt-3">Register</button>
+			<input type="button" class="btn btn-secondary mt-3 btn-outline-secondary" value="Back" onclick="window.location.href='../../manager'" style="width: 100px"/>
+		</div>
 </form>
 <!-- **************************************************************************************************************** -->
 @endsection

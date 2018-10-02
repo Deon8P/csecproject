@@ -2,37 +2,21 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class Manager extends Authenticatable
+class Manager extends Model
 {
     protected $fillable = [
-        'username', 'name', 'surname', 'email', 'password',
+        'user-username', 'name', 'surname', 'email', 'password',
     ];
 
-    public static function updateUserName($id, $username)
+    public static function updateFirstName($username, $name)
     {
-        Manager::where('id', $id)->update(['username' => $username]);
+        Manager::where('user-username', $username)->update(['name' => $name]);
     }
 
-    public static function updateFirstName($id, $name)
+    public static function updateLastName($username, $surname)
     {
-        Manager::where('id', $id)->update(['name' => $name]);
-    }
-
-    public static function updateLastName($id, $surname)
-    {
-        Manager::where('id', $id)->update(['surname' => $surname]);
-    }
-
-    public static function updateEmail($id, $email)
-    {
-        Manager::where('id', $id)->update(['email' => $email]);
-    }
-
-    public static function updatePassword($id, $password)
-    {
-        Manager::where('id', $id)->update(['password' => bcrypt($password)]);
+        Manager::where('user-username', $username)->update(['surname' => $surname]);
     }
 }

@@ -2,46 +2,30 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class Employee extends Authenticatable
+class Employee extends Model
 {
     protected $fillable = [
-        'managed_by', 'username', 'name', 'surname', 'email', 'password', 'leave_balance'
+        'user-username', 'managed_by', 'name', 'surname', 'leave_balance'
     ];
 
-    public static function updateUserName($id, $username)
+    public static function updateFirstName($username, $name)
     {
-        Employee::where('id', $id)->update(['username' => $username]);
+        Employee::where('user-username', $username)->update(['name' => $name]);
+    }
+    public static function updateLastName($username, $surname)
+    {
+        Employee::where('user-username', $username)->update(['surname' => $surname]);
     }
 
-    public static function updateFirstName($id, $name)
+    public static function updateManagedBy($username, $managed_by)
     {
-        Employee::where('id', $id)->update(['name' => $name]);
-    }
-    public static function updateLastName($id, $surname)
-    {
-        Employee::where('id', $id)->update(['surname' => $surname]);
+        Employee::where('user-username', $username)->update(['managed_by' => $managed_by]);
     }
 
-    public static function updateEmail($id, $email)
+    public static function updateLeaveBalance($username, $leave_balance)
     {
-        Employee::where('id', $id)->update(['email' => $email]);
-    }
-
-    public static function updatePassword($id, $password)
-    {
-        Employee::where('id', $id)->update(['password' => bcrypt($password)]);
-    }
-
-    public static function updateManagedBy($id, $managerID)
-    {
-        Employee::where('id', $id)->update(['managed_by' => $managerID]);
-    }
-
-    public static function updateLeaveBalance($id, $leave_balance)
-    {
-        Employee::where('id', $id)->update(['leave_balance' => $leave_balance]);
+        Employee::where('user-username', $username)->update(['leave_balance' => $leave_balance]);
     }
 }

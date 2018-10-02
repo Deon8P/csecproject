@@ -17,19 +17,19 @@ class CreateEmployeesTable extends Migration
 
         Schema::create('employees', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('managed_by')->unsigned();
+            $table->string('user-username');
+            $table->string('managed_by');
             $table->string('name');
             $table->string('surname');
             $table->integer('leave_balance')->default(30);
-            $table->rememberToken();
             $table->timestamps();
         });
 
 
         Schema::table('employees', function(Blueprint $table)
         {
-            $table->foreign('id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('managed_by')->references('id')->on('managers')->onDelete('cascade');
+            $table->foreign('user-username')->references('username')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('managed_by')->references('user-username')->on('managers');
         });
     }
 

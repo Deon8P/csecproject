@@ -13,6 +13,30 @@ class ManagersController extends Controller
 
     public function index()
     {
-        return view('manager.index');
+        return view('manager.crudEmp.create');
+    }
+
+    public function update(Manager $username)
+    {
+        $this->validate(request(), [
+            'name' => 'optional',
+            'surname' => 'optional',
+        ]);
+
+        if(name)
+            Manager::updateFirstName($id, $name);
+
+        if(surname)
+            Manager::updateLastName($id, $surname);
+    }
+
+    public function read(Manager $username)
+    {
+        return Manager::where('user-username', $username)->get();
+    }
+
+    public function destroy(Manager $username)
+    {
+        Manager::where('user-username', $username)->delete();
     }
 }

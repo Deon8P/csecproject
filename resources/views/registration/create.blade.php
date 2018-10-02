@@ -12,7 +12,7 @@
 
 		<h1 style="color: #71b346">Register</h1>
 
-		<form class="form-sr" method="POST" action="/register" enctype="multipart/form-data" >
+		<form class="form-sr" method="POST" action="/register/manager" enctype="multipart/form-data" >
             {{ csrf_field() }}
             <div class="pr-4" style="overflow-y: scroll; height: 470px">
 

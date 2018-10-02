@@ -27,7 +27,7 @@
 <body style="height: 100%">
     @yield('content')
 
-    @yield('footer-content')
+    @yield('footer')
 
 </body>
 
