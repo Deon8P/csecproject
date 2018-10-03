@@ -48,7 +48,7 @@ class LeavesController extends Controller
         ]);
 
         Leave::create([
-            'emp-username' => Auth::user()->username,
+            'emp_username' => Auth::user()->username,
             'leave_type' => request('leave_type'),
             'startDate' => Carbon::createFromFormat('Y-m-d', request('startDate')),
             'endDate' => Carbon::createFromFormat('Y-m-d', request('endDate')),
