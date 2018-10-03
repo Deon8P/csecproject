@@ -22,7 +22,7 @@ class SessionsController extends Controller
     public function storeEmployeeSession()
     {
         $this->validate(request(), [
-            'username' => 'required|exists:employees,user-username',
+            'username' => 'required|exists:employees,user_username',
             'password' => 'required|min:6'
         ]);
 
@@ -41,7 +41,7 @@ class SessionsController extends Controller
     public function storeManagerSession(Request $request)
     {
         $this->validate(request(), [
-            'username' => 'required|exists:managers,user-username',
+            'username' => 'required|exists:managers,user_username',
             'password' => 'required|min:6'
         ]);
 
