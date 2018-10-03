@@ -28,7 +28,13 @@
                 <a class="nav-link" href="/manager/register/employee">Register Employee</a>
             </li>
             <li class="nav-item">
+                    <a class="nav-link" href="/manager/register/employee">Update Employee</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/manager/createLeaveType">Register Leave Type</a>
+            </li>
+            <li class="nav-item">
+                    <a class="nav-link" href="/manager/updateLeaveType">Update Leave Type</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">

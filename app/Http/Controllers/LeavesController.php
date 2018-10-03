@@ -24,6 +24,12 @@ class LeavesController extends Controller
         return view('manager.crudLeave.create');
     }
 
+    public function updateLeaveTypeForm()
+    {
+        $leaveTypes = LeaveType::getAllLeaveTypes();
+        return view('manager.crudLeave.update', compact('leaveTypes'));
+    }
+
     public function storeLeaveType()
     {
         $this->validate(request(), [
@@ -52,30 +58,49 @@ class LeavesController extends Controller
             'leave_type' => request('leave_type'),
             'startDate' => Carbon::createFromFormat('Y-m-d', request('startDate')),
             'endDate' => Carbon::createFromFormat('Y-m-d', request('endDate')),
-            'period' => (abs((strtotime(request('startDate')) - strtotime(request('endDate')))/ 60 / 60 / 24) + 1),
+            'period' => (abs((strtotime(request('startDate')) - strtotime(request('endDate'))) / 60 / 60 / 24) + 1),
             'status' => 'pending'
         ]);
 
         return back();
     }
 
-    public function updateLeaveStatus($leave_type)
-    {
-        Leave::where('leave_type', $leave_type)->update(['status' => 'Inactive']);
-    }
-
-    public function updateLeaveCost($leave_type, $leave_cost)
-    {
-        Leave::where('leave_type', $leave_type)->update(['leave_cost' => $leave_cost]);
-    }
-
-    public function updateLeave($id)
+    public function updateLeaveType($type)
     {
         $this->validate(request(), [
+        ]);
+
+        if(request('leave_type') != null)
+            LeaveType::updateLeaveType($type, request('leave_type'));
+
+        if(request('status') != null)
+            LeaveType::updateLeaveStatus($type, request('status'));
+
+        return back();
+    }
+
+    public function updateLeaveStatus()
+    {
+        $this->validate(request(), [
+            'emp_username' => 'required|exists:leaves,emp_username',
             'status' => 'required'
         ]);
 
-        Leave::where('emp_id', $id)->update(['status' => $status]);
+            Leave::updateLeaveStatus(request('user_username'), request('status'));
+
+            return back();
+    }
+
+    public function destroyLeaveType($type)
+    {
+        LeaveType::destroyLeaveType($type);
+        return back();
+    }
+
+    public function reloadLeaveTypes()
+    {
+        $leaveTypes = LeaveType::getAllLeaveTypes();
+        return view('manager.crudLeave.LeaveTypes' ,compact('leaveTypes'));
     }
 }
 

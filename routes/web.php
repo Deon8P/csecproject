@@ -20,6 +20,10 @@ Route::get('/manager/register/employee', 'RegistrationController@createEmployee'
 Route::post('/register/employee', 'RegistrationController@storeEmployee');
 Route::get('/manager/createLeaveType', 'LeavesController@createLeaveType');
 Route::post('/createLeaveType', 'LeavesController@storeLeaveType');
+Route::get('/manager/updateLeaveType', 'LeavesController@updateLeaveTypeForm');
+Route::get('/manager/reloadLeaveTypes', 'LeavesController@reloadLeaveTypes');
+Route::post('/updateLeaveType/{type}', 'LeavesController@updateLeaveType');
+Route::get('/deleteLeaveType/{type}', 'LeavesController@destroyLeaveType');
 
 //Leave
 Route::get('/leave/apply', 'LeavesController@leaveApplication');

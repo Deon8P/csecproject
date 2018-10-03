@@ -15,18 +15,28 @@ class LeaveType extends Model
         return LeaveType::where('status', 'active')->get();
     }
 
-    public static function updateLeaveStatus($leave_type, $status)
+    public static function getAllLeaveTypes()
     {
-        LeaveType::where('leave_type', $leave_type)->update(['status' => $status]);
+        return LeaveType::all();
     }
 
-    public function readLeaveType(LeaveType $leave_type)
+    public static function updateLeaveStatus($type, $status)
+    {
+        LeaveType::where('leave_type', $type)->update(['status' => $status]);
+    }
+
+    public static function updateLeaveType($type, $leave_type)
+    {
+        LeaveType::where('leave_type', $type)->update(['leave_type', $leave_type]);
+    }
+
+    public function readLeaveType($leave_type)
     {
         return LeaveType::where('leave_type', $leave_type)->get();
     }
 
-    public static function destroyLeaveType(LeaveType $leave_type)
+    public static function destroyLeaveType($type)
     {
-        LeaveType::where('leave_type', $leave_type)->delete();
+        LeaveType::where('leave_type', $type)->delete();
     }
 }

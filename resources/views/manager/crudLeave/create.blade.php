@@ -50,7 +50,7 @@
 
         <div class="form-group container">
             <label for="status">Status</label>
-            <select class="custom-select" name="status" required>
+            <select class="custom-select" id="status" name="status" required>
                 <option value="active" name="active" id="active" selected >Active</option>
                 <option value="suspended" name="suspended" id="suspended">Suspended</option>
             </select>
