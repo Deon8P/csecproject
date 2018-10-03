@@ -17,9 +17,9 @@ Route::get('/employee','EmployeesController@index')->name('employee');
 //Manager
 Route::get('/manager','ManagersController@index')->name('manager');
 Route::get('/manager/register/employee', 'RegistrationController@createEmployee');
-Route::post('/manager/register/employee', 'RegistrationController@storeEmployee');
+Route::post('/register/employee', 'RegistrationController@storeEmployee');
 Route::get('/manager/createLeaveType', 'LeavesController@createLeaveType');
-Route::post('/manager/createLeaveType', 'LeavesController@storeLeaveType');
+Route::post('/createLeaveType', 'LeavesController@storeLeaveType');
 
 //Leave
 Route::get('/leave/apply', 'LeavesController@leaveApplication');

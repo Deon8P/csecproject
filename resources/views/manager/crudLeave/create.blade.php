@@ -36,7 +36,7 @@
 @section('content')
 
 <!-- Input For Creating Leave Type -->
-<form action="/manager/createLeaveType" method="POST" enctype="multipart/form-data">
+<form action="/createLeaveType" method="POST" enctype="multipart/form-data">
      {{ csrf_field() }}
 
         <div class="form-group container">
