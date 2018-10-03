@@ -19,14 +19,14 @@
     <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="AdminHomePage.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/manager">Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="LoginPage.html">Logout</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <button class="btn btn-outline-danger" onclick="window.location.href='../../manager'">Cancel</button>
+            <button class="btn btn-outline-danger" value="Back" onclick="location.href='../../manager'">Cancel</button>
         </form>
     </div>
 </nav>
@@ -37,6 +37,8 @@
 
 <!-- Input For Creating Leave Type -->
 <form action="/manager/createLeaveType" method="POST" enctype="multipart/form-data">
+     {{ csrf_field() }}
+
         <div class="form-group container">
             <legend>Create New Leave Type</legend>
         </div>
@@ -48,7 +50,7 @@
 
         <div class="form-group container">
             <label for="status">Status</label>
-            <select class="custom-select" name="leave_type" required>
+            <select class="custom-select" name="status" required>
                 <option value="active" name="active" id="active" selected >Active</option>
                 <option value="suspended" name="suspended" id="suspended">Suspended</option>
             </select>

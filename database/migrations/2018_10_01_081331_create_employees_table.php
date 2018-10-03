@@ -17,7 +17,7 @@ class CreateEmployeesTable extends Migration
 
         Schema::create('employees', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user-username');
+            $table->string('user_username');
             $table->string('managed_by');
             $table->string('name');
             $table->string('surname');
@@ -28,8 +28,8 @@ class CreateEmployeesTable extends Migration
 
         Schema::table('employees', function(Blueprint $table)
         {
-            $table->foreign('user-username')->references('username')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('managed_by')->references('user-username')->on('managers');
+            $table->foreign('user_username')->references('username')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('managed_by')->references('user_username')->on('managers');
         });
     }
 

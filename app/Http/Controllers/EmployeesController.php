@@ -19,7 +19,7 @@ class EmployeesController extends Controller
         return view('employee.index');
     }
 
-    public function update(Employee $id)
+    public function update(Employee $username)
     {
         $this->validate(request(), [
             'name' => 'optional',
@@ -29,25 +29,15 @@ class EmployeesController extends Controller
         ]);
 
         if(name)
-            Employee::updateFirstName($id, $name);
+            Employee::updateFirstName($username, $name);
 
         if(surname)
-           Employee::updateLastName($id, $surname);
+           Employee::updateLastName($username, $surname);
 
         if(managed_by)
-           Employee::updateManagedBy($id, $managerID);
+           Employee::updateManagedBy($username, $managerID);
 
         if(leave_balance)
-           Employee::updateLeaveBalance($id, $leave_balance);
-    }
-
-    public function read(Employee $username)
-    {
-        return Employee::where('user-username', $username)->get();
-    }
-
-    public function destroy(Employee $username)
-    {
-        Employee::where('user-username', $username)->delete();
+           Employee::updateLeaveBalance($username, $leave_balance);
     }
 }

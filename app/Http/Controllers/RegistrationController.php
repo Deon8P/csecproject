@@ -37,7 +37,7 @@ class RegistrationController extends Controller
        ]);
 
     	Manager::create([
-            'user-username' => request('username'),
+            'user_username' => request('username'),
             'name' => request('name'),
             'surname' => request('surname'),
         ]);
@@ -65,7 +65,7 @@ class RegistrationController extends Controller
         ]);
 
         Employee::create([
-            'user-username' => request('username'),
+            'user_username' => request('username'),
             'managed_by' => Auth::user()->username,
             'name' => request('name'),
             'surname' => request('surname'),

@@ -53,63 +53,30 @@
                 <thead class="">
                 <tr>
                     <th>#</th>
-                    <th>Employee Number</th>
+                    <th>Employee Username</th>
                     <th>Employee Name</th>
                     <th>Employee Surname</th>
-                    <th>Previous Leave Applications</th>
-                    <th>Approved/Disapproved</th>
-                    <th>Warning Days</th>
-                    <th>Warning Days Required</th>
+                    <th>Leave Balance</th>
 
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>
-                        <label class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-indicator"></span>
-                        </label>
-                    </td>
-                    <td>EMP001</td>
-                    <td>John</td>
-                    <td>Graham</td>
-                    <td>sick Leave</td>
-                    <td>Approved</td>
-                    <td>Calculated</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-indicator"></span>
-                        </label>
-                    </td>
-                    <td>EMP002</td>
-                    <td>Koos</td>
-                    <td>potgieter</td>
-                    <td>Family leave</td>
-                    <td>Approved</td>
-                    <td>Calculated</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-indicator"></span>
-                        </label>
-                    <td>EMP003</td>
-                    <td>Sannie</td>
-                    <td>Van der Merwe</td>
-                    <td>Holiday Leave</td>
-                    <td>Disapproved</td>
-                    <td>Calculated</td>
-                    <td>5</td>
-                </tr>
-                </tr>
-
+                @if($employees != null)
+                @foreach ($employees as $employee)
+                    <tr>
+                        <td>
+                            <label class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input">
+                                <span class="custom-control-indicator"></span>
+                            </label>
+                        </td>
+                        <td>{{ $employee->user_username }}</td>
+                        <td>{{ $employee->name }}</td>
+                        <td>{{ $employee->surname }}</td>
+                        <td>{{ $employee->leave_balance }}</td>
+                    </tr>
+                @endforeach
+                @endif
                 </tbody>
             </table>
         </div>
@@ -122,8 +89,6 @@
                     <button type="button" class="btn btn-outline-success">Approve All</button>&nbsp &nbsp
                     <button type="button" class="btn btn-outline-danger float-right ">Disapprove All</button>
                     <button type="button" class="btn btn-outline-warning float-right">Disapprove</button>
-
-
                 </th>
             </tr>
 

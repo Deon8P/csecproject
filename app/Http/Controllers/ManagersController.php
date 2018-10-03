@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Manager;
 
 class ManagersController extends Controller
 {
@@ -13,10 +14,11 @@ class ManagersController extends Controller
 
     public function index()
     {
-        return view('manager.index');
+        $employees = Manager::getMyEmps();
+        return view('manager.index', compact('employees'));
     }
 
-    public function update(Manager $username)
+    public function update()
     {
         $this->validate(request(), [
             'name' => 'optional',
@@ -24,19 +26,9 @@ class ManagersController extends Controller
         ]);
 
         if(name)
-            Manager::updateFirstName($id, $name);
+            Manager::updateFirstName(Auth::user()->username, $name);
 
         if(surname)
-            Manager::updateLastName($id, $surname);
-    }
-
-    public function read(Manager $username)
-    {
-        return Manager::where('user-username', $username)->get();
-    }
-
-    public function destroy(Manager $username)
-    {
-        Manager::where('user-username', $username)->delete();
+            Manager::updateLastName(Auth::user()->username, $surname);
     }
 }

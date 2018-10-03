@@ -15,7 +15,7 @@ class CreateLeavesTable extends Migration
     {
         Schema::create('leaves', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('emp-username');
+            $table->string('emp_username');
             $table->string('leave_type');
             $table->date('startDate');
             $table->date('endDate');
@@ -26,7 +26,7 @@ class CreateLeavesTable extends Migration
 
         Schema::table('leaves', function(Blueprint $table)
         {
-            $table->foreign('emp-username')->references('user-username')->on('employees')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('emp_username')->references('user_username')->on('employees')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('leave_type')->references('leave_type')->on('leave_types')->onUpdate('cascade');
         });
     }
