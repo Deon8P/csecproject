@@ -14,8 +14,9 @@
 
         <!--Sign In Button -->
         <div class="form-sr mt-3">
-            <button class="btn btn-lg btn-block btn-secondary" type="submit">Sign In</button>
+            <button onclick="loginManager()" class="btn btn-lg btn-block btn-secondary" type="submit">Sign In</button>
         </div>
 
         <a href="/register" style="color: #71b346">Register</a>
 </form>
+

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 <head>
-    @section('style')
+	@section('style')
     <link href="/css/reg-login.css" rel="stylesheet">
     @endsection
 </head>

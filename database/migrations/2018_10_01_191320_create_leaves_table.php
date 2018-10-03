@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLeaveApplicationsTable extends Migration
+class CreateLeavesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,21 @@ class CreateLeaveApplicationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('leaveApplications', function (Blueprint $table) {
+        Schema::create('leaves', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('emp_id')->unsigned();
+            $table->string('emp-username');
             $table->string('leave_type');
-            $table->dateTime('startDate');
-            $table->dateTime('endDate');
+            $table->date('startDate');
+            $table->date('endDate');
             $table->integer('period');
             $table->string('status');
             $table->timestamps();
         });
 
-        Schema::table('leaveApplications', function(Blueprint $table)
+        Schema::table('leaves', function(Blueprint $table)
         {
-            $table->foreign('emp_id')->references('id')->on('employees')->onDelete('cascade');
-            $table->foreign('leave_type')->references('leave_type')->on('leaveTypes');
+            $table->foreign('emp-username')->references('user-username')->on('employees')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('leave_type')->references('leave_type')->on('leave_types')->onUpdate('cascade');
         });
     }
 
@@ -38,6 +38,6 @@ class CreateLeaveApplicationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('leaveApplications');
+        Schema::dropIfExists('leaves');
     }
 }

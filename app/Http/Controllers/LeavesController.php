@@ -3,22 +3,36 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use App\Leave;
+use App\LeaveType;
 use App\Employee;
 
 class LeavesController extends Controller
 {
-    public function store()
+
+    public function leaveApplication()
+    {
+        $leaves = LeaveType::getActiveLeave();
+        
+        return view('employee.leave.application', compact('leaves'));
+    }
+    
+    public function createLeaveType()
+    {
+        return view('manager.crudLeave.create');
+    }
+
+    public function storeLeaveType()
     {
         $this->validate(request(), [
-            'emp_id' => 'required',
             'leave_type' => 'required',
             'period' => 'required',
             'status' => 'required'
         ]);
 
-        Leave::create([
-            'emp_id' => request('emp_id'),
+        LeaveType::create([
             'leave_type' => request('leave_type'),
             'period' => request('period'),
             'status' => request('status')
@@ -27,20 +41,26 @@ class LeavesController extends Controller
         return back();
     }
 
-    public function storeLeaveType()
+    public function storeApplication(Request $request)
     {
         $this->validate(request(), [
             'leave_type' => 'required',
-            'leave_cost' => 'required'
+            'startDate' => 'required|date',
+            'endDate' => 'required|date'     
         ]);
 
         Leave::create([
+            'emp-username' => Auth::user()->username,
             'leave_type' => request('leave_type'),
-            'leave_cost' => request('leave_cost')
+            'startDate' => Carbon::createFromFormat('Y-m-d', request('startDate')),
+            'endDate' => Carbon::createFromFormat('Y-m-d', request('endDate')),
+            'period' => abs((strtotime(request('startDate')) - strtotime(request('endDate')))/ 60 / 60 / 24) + 1,
+            'status' => 'pending'
         ]);
 
         return back();
     }
+
 
     public function updateLeaveStatus($leave_type)
     {
@@ -61,14 +81,14 @@ class LeavesController extends Controller
         Leave::where('emp_id', $id)->update(['status' => $status]);
     }
 
-    public function read(Employee $id)
+    public function read(Leave $username)
     {
-        return Leave::where('emp_id', $id)->get();
+        return Leave::where('emp-username', $username)->get();
     }
 
-    public function destroy(Employee $id)
+    public function destroy(Leave $username)
     {
-        Leave::where('emp_id', $id)->delete();
+        Leave::where('emp-username', $username)->delete();
     }
 
 }

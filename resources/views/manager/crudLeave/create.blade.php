@@ -26,7 +26,7 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <a href="AdminHomePage.html" class="btn btn-outline-danger" role="button">Cancel</a>
+            <button class="btn btn-outline-danger" onclick="window.location.href='../../manager'">Cancel</button>
         </form>
     </div>
 </nav>
@@ -34,70 +34,30 @@
 @endsection
 
 @section('content')
-<!-- Image -->
-<div class="form-group container col-12">
-    <p>
-
-
-    </p>
-    <img src="Logo.png" style="width:550px;height:550px; float:right">
-</div>
-<!-- **************************************************************************************************************** -->
 
 <!-- Input For Creating Leave Type -->
-<form>
-    <p>
-
-
-    </p>
-    <fieldset>
+<form action="/manager/createLeaveType" method="POST" enctype="multipart/form-data">
         <div class="form-group container">
             <legend>Create New Leave Type</legend>
         </div>
-        <p>
 
-        </p>
         <div class="form-group container ">
-            <label for="LeaveName">Leave Name</label>
-            <input type="Text" class="form-control" id="LeaveName" placeholder="Enter Leave Type name here">
-        </div>
-        <div class="form-group container ">
-            <label for="DaysAvailable">Days available for leave</label>
-            <input type="Text" class="form-control" id="DaysAvailable" placeholder="Days Available">
-        </div>
-        <div class="form-group container">
-            <label for="WarningDays">Warning Beforehand Days</label>
-            <input type="Text" class="form-control" id="WarningDays" placeholder="Warning Days">
+            <label for="leave_type">Leave Type</label>
+            <input type="text" class="form-control" id="leave_type" name="leave_type" placeholder="Enter leave type name here." required>
         </div>
 
-        <!--Drop DownList -->
         <div class="form-group container">
-            <label>Gender</label>
-        </div >
-        <div class="form-group container">
-            <select class="custom-select">
-                <option selected="">Select</option>
-                <option value="1">Female</option>
-                <option value="2">Male</option>
-                <option value="3">Both</option>
+            <label for="status">Status</label>
+            <select class="custom-select" name="leave_type" required>
+                <option value="active" name="active" id="active" selected >Active</option>
+                <option value="suspended" name="suspended" id="suspended">Suspended</option>
             </select>
-        </div>
-        <!-- **************************************************************************************************************** -->
-        <div class="form-group container">
-            <label for="OtherInfo">Other</label>
-            <textarea class="form-control" id="OtherInfo" rows="3" placeholder="Add Additional Information"></textarea>
         </div>
 
         <!--Create Button -->
-        <div class="form-group container ">
-
-            <a href="AdminHomePage.html" class="btn btn-outline-success" role="button">Create</a>
+        <div class="form-group container mt-5">
+            <button type="submit" class="btn btn-outline-success" >Create</button>
         </div>
-        <p>
-
-
-        </p>
-    </fieldset>
 </form>
 <!-- **************************************************************************************************************** -->
 

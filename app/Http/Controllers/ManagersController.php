@@ -13,7 +13,7 @@ class ManagersController extends Controller
 
     public function index()
     {
-        return view('manager.crudEmp.create');
+        return view('manager.index');
     }
 
     public function update(Manager $username)

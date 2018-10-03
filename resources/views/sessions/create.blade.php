@@ -12,7 +12,7 @@
 <!-- **************************************************************************************************************** -->
 
 @section('content')
-<div class="container">
+<div  class="container">
 <!-- Image -->
 <div class="text-center form-group container mt-2 mb-5">
         <div class="form-group container">

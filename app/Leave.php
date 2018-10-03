@@ -4,9 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Leave extends Model
 {
     protected $fillable = [
-        'emp_id', 'leave_type', 'period', 'status'
+        'emp-username', 'leave_type', 'startDate', 'endDate', 'period', 'status' 
     ];
+
+
+
 }

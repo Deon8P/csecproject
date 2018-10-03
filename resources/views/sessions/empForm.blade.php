@@ -14,6 +14,20 @@
 
         <!--Sign In Button -->
         <div class="form-sr mt-3">
-            <button class="btn btn-lg btn-block btn-secondary" type="submit">Sign In</button>
+            <button onclick="loginEmployee()" class="btn btn-lg btn-block btn-secondary" type="submit">Sign In</button>
         </div>
 </form>
+
+<script>
+    function loginEmployee() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("pageContentOuter").innerHTML =
+                    this.responseText;
+            }
+        };
+        xhttp.open("POST", "/login/employee", true);
+        xhttp.send();
+    }
+</script>

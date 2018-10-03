@@ -22,10 +22,13 @@
                 <a class="nav-link" href="ManagerHomePage.html">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Help</a>
+                <a class="nav-link" href="LoginPage.html">Logout</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="LoginPage.html">Logout</a>
+                <a class="nav-link" href="/manager/register/employee">Register Employee</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/manager/createLeaveType">Register Leave Type</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">

@@ -22,7 +22,7 @@
                 <a class="nav-link" href="EmployeeHomePage.html">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="ApplicationPage.html">Apply Here</a>
+                <a class="nav-link" href="/leave/apply">Apply Here</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Help</a>

@@ -15,6 +15,11 @@ class RegistrationController extends Controller
         return view('registration.create');
     }
 
+    public function createEmployee()
+    {
+        return view('manager.crudEmp.create');
+    }
+
     public function storeManager()
     {
     	$this->validate(request(), [

@@ -15,11 +15,10 @@ class CreateLeaveTypesTable extends Migration
     {
         Schema::defaultStringLength(191);
 
-        Schema::create('leaveTypes', function (Blueprint $table) {
+        Schema::create('leave_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('leave_type')->unique();
-            $table->integer('leave_cost');
-            $table->string('status')->default('Active');
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateLeaveTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('leaveTypes');
+        Schema::dropIfExists('leave_types');
     }
 }
