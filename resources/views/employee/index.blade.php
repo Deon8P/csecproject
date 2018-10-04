@@ -2,11 +2,10 @@
 
 <head>
 
-    @section('style')
+        @section('style')
+        @endsection
 
-    @endsection
-
-</head>
+    </head>
 
 @section('nav')
 <!-- NavBar -->
@@ -19,22 +18,15 @@
     <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="EmployeeHomePage.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/employee">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/leave/apply">Apply Here</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Help</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="LoginPage.html">Logout</a>
+                <a class="nav-link" href="/logout">Logout</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button type="button" class="btn btn-outline-success">Search</button>
-        </form>
     </div>
 </nav>
 <!-- **************************************************************************************************************** -->
@@ -42,26 +34,32 @@
 
 @section('content')
 <!-- Table for Display -->
-
-<table class="table table-hover">
+<input class="form-control mr-sm-2" type="date" width="100%" style="position: auto; left: 0; right: 0;">
+<h1 class="text-center mt-3">Application History</h1>
+<table class="table table-hover" style="position: absolute; left: 0; right: 0;">
     <thead>
 
     <tr class="table-dark">
-        <th scope="row">Employee Number</th>
-        <th>Employee ID</th>
-        <th>Employee Name</th>
-        <th>Employee Last Name</th>
-        <th>Leave Balance</th>
-        <th>Previous Leave Application</th>
-        <th>Approved/Disaproved</th>
+        <th scope="row">Created</th>
+        <th>Leave Type</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Period</th>
+        <th>Status</th>
     </tr>
-    <td>123456789</td>
-    <td>EP001</td>
-    <td>Koos</td>
-    <td>Potgieter</td>
-    <td>10</td>
-    <td>Sick</td>
-    <td>Approved</td>
+    <tbody>
+        @if($leaves != null)
+        @foreach ($leaves as $leave)
+        <tr>
+        <td>{{ $leave->created_at }}</td>
+        <td>{{ $leave->leave_type }}</td>
+        <td>{{ $leave->startDate }}</td>
+        <td>{{ $leave->endDate }}</td>
+        <td>{{ $leave->period }}</td>
+        <td>{{ $leave->status }}</td>
+        </tr>
+        @endforeach
+        @endif
     </tbody>
 </table>
 

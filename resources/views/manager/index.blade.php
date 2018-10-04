@@ -3,7 +3,6 @@
 <head>
 
     @section('style')
-
     @endsection
 
 </head>
@@ -19,28 +18,16 @@
     <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="ManagerHomePage.html">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="LoginPage.html">Logout</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/manager/register/employee">Register Employee</a>
-            </li>
-            <li class="nav-item">
-                    <a class="nav-link" href="/manager/register/employee">Update Employee</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="/manager/createLeaveType">Register Leave Type</a>
             </li>
             <li class="nav-item">
-                    <a class="nav-link" href="/manager/updateLeaveType">Update Leave Type</a>
+                <a class="nav-link" href="/manager/updateLeaveType">Update Leave Type</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button type="button" class="btn btn-outline-success">Search</button>
-        </form>
+
     </div>
 </nav>
 <!-- **************************************************************************************************************** -->
@@ -48,60 +35,40 @@
 
 @section('content')
 
-<!-- Table with Sliders -->
-
-
-<main class="container pt-10">
-    <div class="card mb-10">
-        <div class="card-header">Fearures</div>
-        <div class="card-block p-10">
-            <table class="table table-hovertable-sm m-10">
-                <thead class="">
-                <tr>
-                    <th>#</th>
-                    <th>Employee Username</th>
-                    <th>Employee Name</th>
-                    <th>Employee Surname</th>
-                    <th>Leave Balance</th>
-
-                </tr>
-                </thead>
-                <tbody>
-                @if($employees != null)
-                @foreach ($employees as $employee)
-                    <tr>
-                        <td>
-                            <label class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input">
-                                <span class="custom-control-indicator"></span>
-                            </label>
-                        </td>
-                        <td>{{ $employee->user_username }}</td>
-                        <td>{{ $employee->name }}</td>
-                        <td>{{ $employee->surname }}</td>
-                        <td>{{ $employee->leave_balance }}</td>
-                    </tr>
-                @endforeach
+<div class="" style="position: absolute; left: 0; right: 0;">
+                @if($applications != null)
+                @include('manager.applications')
+                @else
+                <h1 class="text-center">No more applications to proccess.</h1>
                 @endif
-                </tbody>
-            </table>
-        </div>
-        <div class="card-footer p-0">
 
-            <tr>
-                <th></th>
-                <th colspan="4">
-                    <button type="button" class="btn btn-outline-info">Approve</button>&nbsp &nbsp
-                    <button type="button" class="btn btn-outline-success">Approve All</button>&nbsp &nbsp
-                    <button type="button" class="btn btn-outline-danger float-right ">Disapprove All</button>
-                    <button type="button" class="btn btn-outline-warning float-right">Disapprove</button>
-                </th>
-            </tr>
+            </div>
 
-
-        </div>
-    </div>
-</main>
 
 <!-- **************************************************************************************************************** -->
+@endsection
+
+@section('scripts')
+<script>
+    function searchFunction() {
+      // Declare variables
+      var input, filter, table, tr, td, i;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+</script>
 @endsection

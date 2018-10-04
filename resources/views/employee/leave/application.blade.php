@@ -2,12 +2,10 @@
 
 <head>
 
-    @section('style')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-     @endsection
+        @section('style')
+        @endsection
 
-</head>
+    </head>
 
 @section('nav')
 <!-- NavBar -->
@@ -20,21 +18,12 @@
     <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="EmployeeHomePage.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/employee">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Help</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="LoginPage.html">Logout</a>
+                <a class="nav-link" href="/logout">Logout</a>
             </li>
         </ul>
-
-        <!-- Cancel button -->
-        <form class="form-inline my-2 my-lg-0">
-            <a href="EmployeeHomePage.html" class="btn btn-outline-danger" role="button">Cancel</a>
-
-        </form>
     </div>
 </nav>
 <!-- **************************************************************************************************************** -->
@@ -65,22 +54,23 @@
         </div>
 
         <div class="form-group container">
-            
+
         <div class="input-daterange" id="datepicker">
             <label>Start date for leave</label>
-            
+
             <input type="text" class="input-sm form-control" name="startDate" id="startDate" required/>
           <br>
             <label>to</label>
           <br>
-            <label class="mt-4">End date for leave</label> 
-            
+            <label class="mt-4">End date for leave</label>
+
             <input type="text" class="input-sm form-control" name="endDate" id="endDate" required/>
-                    
+
         </div>
-    </div>        
+    </div>
         <div class="form-group container ">
-            <button class="btn" type="submit">Apply</button>
+            <a href="/employee" class="btn btn-outline-danger float-left" role="button">Cancel</a>
+            <button class="btn btn-outline-success float-right" type="submit">Apply</button>
         </div>
         </div>
     </div>

@@ -2,11 +2,10 @@
 
 <head>
 
-    @section('style')
+        @section('style')
+        @endsection
 
-    @endsection
-
-</head>
+    </head>
 
 @section('nav')
 <!-- NavBar -->
@@ -22,12 +21,9 @@
                 <a class="nav-link" href="/manager">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="LoginPage.html">Logout</a>
+                <a class="nav-link" href="/logout">Logout</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <button class="btn btn-outline-danger" value="Back" onclick="location.href='../../manager'">Cancel</button>
-        </form>
     </div>
 </nav>
 <!-- **************************************************************************************************************** -->
@@ -59,8 +55,11 @@
         <!--Create Button -->
         <div class="form-group container mt-5">
             <button type="submit" class="btn btn-outline-success" >Create</button>
+            <button class="form-inline btn btn-outline-danger float-right" onclick="window.location = '/manager'">Cancel</button>
         </div>
-</form>
+
+    </form>
+
 <!-- **************************************************************************************************************** -->
 
 @endsection

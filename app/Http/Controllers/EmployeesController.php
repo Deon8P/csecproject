@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use app\Employee;
 use App\User;
+use App\Leave;
 
 class EmployeesController extends Controller
 {
@@ -16,7 +18,8 @@ class EmployeesController extends Controller
 
     public function index()
     {
-        return view('employee.index');
+        $leaves = Leave::leaveHistory(Auth::user()->username);
+        return view('employee.index', compact('leaves'));
     }
 
     public function update(Employee $username)

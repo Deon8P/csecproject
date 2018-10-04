@@ -24,6 +24,7 @@ Route::get('/manager/updateLeaveType', 'LeavesController@updateLeaveTypeForm');
 Route::get('/manager/reloadLeaveTypes', 'LeavesController@reloadLeaveTypes');
 Route::post('/updateLeaveType/{type}', 'LeavesController@updateLeaveType');
 Route::get('/deleteLeaveType/{type}', 'LeavesController@destroyLeaveType');
+Route::post('/updateApplication/{id}', 'LeavesController@updateLeaveStatus');
 
 //Leave
 Route::get('/leave/apply', 'LeavesController@leaveApplication');

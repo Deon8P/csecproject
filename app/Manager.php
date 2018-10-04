@@ -11,6 +11,11 @@ class Manager extends Model
         'user_username', 'name', 'surname', 'email', 'password',
     ];
 
+    public static function managedEmployees()
+    {
+        return Employee::select('user_username')->where('managed_by', Auth::user()->username)->get();
+    }
+
     public static function updateFirstName($username, $name)
     {
         Manager::where('user_username', $username)->update(['name' => $name]);

@@ -3,22 +3,36 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Employee;
 
 class Leave extends Model
 {
     protected $fillable = [
-        'emp_username', 'leave_type', 'startDate', 'endDate', 'period', 'status'
+        'id', 'emp_username', 'leave_type', 'startDate', 'endDate', 'period', 'status'
     ];
 
-    public static function updateLeaveStatus($username, $status)
+    public static function leaveHistory($user_username)
     {
-        LeaveType::where('user_username', $username)->update(['status' => $status]);
+        return Leave::where('emp_username', $user_username)->orderBy('created_at', 'desc')->get();
     }
 
-    public static function readLeave($username)
+    public static function returnPending()
     {
-        return Leave::where('emp_username', $username)->get();
+        $users = Employee::select('user_username')->where('managed_by', '=', Auth::user()->username)->get()->toArray();
+
+        $applications = DB::table('leaves')
+        ->whereIn('emp_username', $users)
+        ->where('status', '=', 'pending')
+        ->get();
+
+        return $applications;
+    }
+
+    public static function updateLeaveStatus($id, $status)
+    {
+        Leave::where('id', $id)->update(['status' => $status]);
     }
 
     public static function destroyLeave($username)

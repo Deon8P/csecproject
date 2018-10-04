@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Manager;
+use App\Leave;
 
 class ManagersController extends Controller
 {
@@ -15,16 +16,12 @@ class ManagersController extends Controller
     public function index()
     {
         $employees = Manager::getMyEmps();
-        return view('manager.index', compact('employees'));
+        $applications = Leave::returnPending();
+        return view('manager.index', compact('applications'));
     }
 
     public function update()
     {
-        $this->validate(request(), [
-            'name' => 'optional',
-            'surname' => 'optional',
-        ]);
-
         if(name)
             Manager::updateFirstName(Auth::user()->username, $name);
 

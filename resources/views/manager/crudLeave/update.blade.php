@@ -2,11 +2,10 @@
 
 <head>
 
-    @section('style')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    @endsection
+        @section('style')
+        @endsection
 
-</head>
+    </head>
 
 @section('nav')
 <!-- NavBar -->
@@ -19,10 +18,10 @@
     <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="AdminHomePage.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/manager">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="LoginPage.html">Logout</a>
+                <a class="nav-link" href="/logout">Logout</a>
             </li>
         </ul>
     </div>
@@ -33,8 +32,8 @@
 @section('content')
 
 <!--Table to edit Leave-->
-
-<table class="table table-hover">
+<div class="card" >
+<table class="table table-hover" style="border: 1; width:100%">
     <thead>
     <tr class="table-dark">
         <th scope="row">Leave Type</th>
@@ -48,6 +47,7 @@
     </tbody>
 
 </table>
+</div>
 
 <!-- **************************************************************************************************************** -->
 @endsection

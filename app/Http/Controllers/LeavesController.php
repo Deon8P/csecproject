@@ -67,9 +67,6 @@ class LeavesController extends Controller
 
     public function updateLeaveType($type)
     {
-        $this->validate(request(), [
-        ]);
-
         if(request('leave_type') != null)
             LeaveType::updateLeaveType($type, request('leave_type'));
 
@@ -79,15 +76,13 @@ class LeavesController extends Controller
         return back();
     }
 
-    public function updateLeaveStatus()
+    public function updateLeaveStatus($id)
     {
         $this->validate(request(), [
-            'emp_username' => 'required|exists:leaves,emp_username',
             'status' => 'required'
         ]);
 
-            Leave::updateLeaveStatus(request('user_username'), request('status'));
-
+            Leave::updateLeaveStatus($id, request('status'));
             return back();
     }
 

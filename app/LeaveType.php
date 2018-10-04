@@ -27,7 +27,7 @@ class LeaveType extends Model
 
     public static function updateLeaveType($type, $leave_type)
     {
-        LeaveType::where('leave_type', $type)->update(['leave_type', $leave_type]);
+        LeaveType::where('leave_type', $type)->update(['leave_type' => $leave_type]);
     }
 
     public function readLeaveType($leave_type)

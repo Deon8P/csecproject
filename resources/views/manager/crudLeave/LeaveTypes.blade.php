@@ -5,7 +5,7 @@
     <form action="/updateLeaveType/{{ $leaveType->leave_type }}" method="POST" enctype="multipart/form-data">
 
         {{ csrf_field() }}
-    <td><input type="text" id="leave_type{{ $leaveType->leave_type }}" name="leave_type" contenteditable="true" placeholder="{{ $leaveType->leave_type }}" ></td>
+    <td><input type="text" id="leave_type{{ $leaveType->leave_type }}" name="leave_type" placeholder="{{ $leaveType->leave_type }}" ></td>
         <td>
             <select class="custom-select" id="status{{ $leaveType->leave_type }}" name="status" required>
                 @if($leaveType->status == 'active')
@@ -19,7 +19,7 @@
         </td>
     <td>
 
-    <button type="submit" id="edit{{ $leaveType->leave_type }}" data-value="{{ $leaveType->leave_type }}" name="edit{{ $leaveType->leave_type }}" class="btn edit btn-outline-warning">Edit</button>
+    <button type="submit" id="edit{{ $leaveType->leave_type }}" name="edit{{ $leaveType->leave_type }}" class="btn edit btn-outline-warning">Edit</button>
     </td>
     <td>
             <button onclick="window.location.href='/deleteLeaveType/{{ $leaveType->leave_type }}'" type="button" id="delete{{ $leaveType->leave_type }}" data-value="{{ $leaveType->leave_type }}" name="delete{{ $leaveType->leave_type }}" class="btn delete btn-outline-danger">Delete</button>
