@@ -16,22 +16,18 @@ class UsersController extends Controller
 		$this->middleware('auth');
     }
 
-	public function update(User $username)
+	public function update($username)
     {
-        $this->validate(request(), [
-            'username' => 'optional',
-			'email' => 'optional',
-			'password' => 'optional'
-        ]);
-
-        if(username)
+        if(request('username'))
             User::updateUserName($username);
 
-        if(email)
+        if(request('email'))
 			User::updateEmail($username, $email);
 
-		if(password)
+		if(request('password'))
             User::updatePassword($username, bcrypt($password));
+
+        return back();
     }
 
     public function read(User $username)

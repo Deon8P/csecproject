@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Manager;
+use App\Employee;
 
 class AdminsController extends Controller
 {
@@ -15,10 +17,11 @@ class AdminsController extends Controller
     {
         return view('admin.index');
     }
-    
+
     public function createEmployee()
     {
-        return view('admin.crudEmp.createEmployee');
+        $managers = Manager::select('user_username')->get();
+        return view('admin.crudEmp.createEmployee', compact('managers'));
     }
 
     public function createManager()
@@ -28,36 +31,65 @@ class AdminsController extends Controller
 
     public function updateEmployees()
     {
-        return view('admin.crudEmp.updateEmployees');
+        $employees = Employee::get();
+        $managers = Manager::select('user_username')->get();
+        return view('admin.crudEmp.updateEmployees' , compact('employees', 'managers'));
     }
 
     public function updateManagers()
     {
-        return view('admin.crudManager.updateManagers');
+        $Managers = Manager::get();
+        return view('admin.crudManager.updateManagers', compact('managers'));
     }
 
     public function updateEmployee($username)
     {
-        if(name)
+        if(request('name'))
+        {
             Employee::updateFirstName($username, $name);
+        }
 
-        if(surname)
-           Employee::updateLastName($username, $surname);
+        if(request('surname'))
+        {
+        Employee::updateLastName($username, $surname);
+        }
 
-        if(managed_by)
-           Employee::updateManagedBy($username, $managerID);
+        if(request('managed_by'))
+        {
+        Employee::updateManagedBy($username, $managerID);
+        }
 
-        if(leave_balance)
-           Employee::updateLeaveBalance($username, $leave_balance);
+        if(request('leave_balance'))
+        {
+        Employee::updateLeaveBalance($username, $leave_balance);
+        }
+
+        return back();
     }
 
     public function updateManager($username)
     {
-        if(name)
+        if(request('name'))
             Manager::updateFirstName($username, $name);
 
-        if(surname)
+        if(request('surname'))
             Manager::updateLastName($username, $surname);
+
+        return back();
+    }
+
+    public function destroyEmployee($username)
+    {
+        Employee::destroy($username);
+
+        return back();
+    }
+
+    public function destroyManager($username)
+    {
+        Manager::destroy($username);
+
+        return back();
     }
 
 }

@@ -51,6 +51,7 @@ class RegistrationController extends Controller
             'name' => 'required|min:2',
             'surname' => 'required|min:2',
             'email' => 'required|email|unique:users,email',
+            'managed_by' => 'required',
             'password' => 'required|confirmed|min:6'
         ]);
 
@@ -60,17 +61,25 @@ class RegistrationController extends Controller
             'password' => bcrypt(request('password')),
         ]);
 
+        if(request('leave_balance') != null)
+        {
+            $leave_balance = request('leave_balance');
+        }
+        else
+        {
+            $leave_balance = 30;
+        }
         Employee::create([
             'user_username' => request('username'),
-            'managed_by' => Auth::user()->username,
+            'managed_by' => request('managed_by'),
             'name' => request('name'),
             'surname' => request('surname'),
-            'leave_balance' => request('leave_balance')
+            'leave_balance' => $leave_balance
         ]);
 
         return back();
     }
-    
+
     public function storeManager()
     {
         $this->validate(request(), [

@@ -18,11 +18,13 @@ Route::get('/admin/register/manager', 'AdminsController@createManager');
 Route::get('/admin/register/employee', 'AdminsController@createEmployee');
 Route::post('/register/manager', 'RegistrationController@storeManager');
 Route::post('/register/employee', 'RegistrationController@storeEmployee');
-
 Route::get('/admin/update/managers', 'AdminsController@updateManagers');
 Route::get('/admin/update/employees', 'AdminsController@updateEmployees');
 Route::post('/update/manager/{username}', 'AdminsController@updateManager');
 Route::post('/update/employee/{username}', 'AdminsController@updateEmployee');
+Route::post('/delete/manager/{username}', 'AdminsController@destroyManager');
+Route::post('/delete/employee/{username}', 'AdminsController@destroyEmployee');
+
 
 //Manager
 Route::get('/manager','ManagersController@index')->name('manager');

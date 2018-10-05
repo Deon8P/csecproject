@@ -1,6 +1,6 @@
 <form class="form-sr" action="login/admin" method="POST" enctype="multipart/form-data">
-    {{ csrf_field() }}
 
+    {{ csrf_field() }}
 
         <div class="form-sr">
             <h5 for="username" style="color: #71b346">Admin Username</h5>
@@ -16,6 +16,6 @@
         <div class="form-sr mt-3">
             <button class="btn btn-lg btn-block btn-secondary" type="submit">Sign In</button>
         </div>
-        
+
         <a href="/register" style="color: #71b346">Register</a>
 </form>

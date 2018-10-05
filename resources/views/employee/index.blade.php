@@ -48,7 +48,7 @@
         <th>Status</th>
     </tr>
     <tbody>
-        @if($leaves != null)
+        @if(! $leaves->isEmpty())
         @foreach ($leaves as $leave)
         <tr>
         <td>{{ $leave->created_at }}</td>
@@ -59,6 +59,8 @@
         <td>{{ $leave->status }}</td>
         </tr>
         @endforeach
+        @else
+        <h1 class="text-center"><a href="/leave/apply">Apply for leave first.</a></h1>
         @endif
     </tbody>
 </table>

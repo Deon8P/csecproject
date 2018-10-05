@@ -17,13 +17,13 @@
 
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
-    
+
 
 </head>
 
 @yield('nav')
 
-<body style="height: 100%">
+<body style="height: 100%;">
 
 <div class="container" id="pageContentOuter">
     @yield('content')

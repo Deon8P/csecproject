@@ -26,21 +26,21 @@
 <div class="container text-center mt-5">
 <!-- Input For Login -->
 
-    <ul class="pr-5 nav nav-pills mb-3 container form-sr" id="pills-tab" role="tablist">
-            
+    <ul class=" nav nav-pills mb-3 container form-sr" id="pills-tab" role="tablist">
+
             <li class="nav-item">
-              <a class="nav-link active" id="pills-admin-tab" data-toggle="pill" href="#pills-admin" role="tab" aria-controls="pills-admin" aria-selected="false">Admin</a>
+              <a class="nav-link btn-outline-success active" id="pills-admin-tab" data-toggle="pill" href="#pills-admin" role="tab" aria-controls="pills-admin" aria-selected="false">Admin</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" id="pills-manager-tab" data-toggle="pill" href="#pills-manager" role="tab" aria-controls="pills-manager" aria-selected="true">Manager</a>
+              <a class="nav-link btn-secondary btn-outline-success" id="pills-manager-tab" data-toggle="pill" href="#pills-manager" role="tab" aria-controls="pills-manager" aria-selected="true">Manager</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" id="pills-employee-tab" data-toggle="pill" href="#pills-employee" role="tab" aria-controls="pills-employee" aria-selected="false">Employee</a>
+              <a class="nav-link btn-secondary btn-outline-success" id="pills-employee-tab" data-toggle="pill" href="#pills-employee" role="tab" aria-controls="pills-employee" aria-selected="false">Employee</a>
             </li>
           </ul>
-          
+
         </ul>
 
             @include('layouts.errors')

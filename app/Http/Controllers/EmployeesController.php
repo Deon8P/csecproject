@@ -21,19 +21,4 @@ class EmployeesController extends Controller
         $leaves = Leave::leaveHistory(Auth::user()->username);
         return view('employee.index', compact('leaves'));
     }
-
-    public function update(Employee $username)
-    {
-        if(name)
-            Employee::updateFirstName($username, $name);
-
-        if(surname)
-           Employee::updateLastName($username, $surname);
-
-        if(managed_by)
-           Employee::updateManagedBy($username, $managerID);
-
-        if(leave_balance)
-           Employee::updateLeaveBalance($username, $leave_balance);
-    }
 }

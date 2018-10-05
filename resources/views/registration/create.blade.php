@@ -10,11 +10,10 @@
 <div class="container">
 	<div class="text-center" >
 
-		<h1 style="color: #71b346">Register</h1>
+		<h1 style="color: #71b346">Admin Register</h1>
 
 		<form class="form-sr" method="POST" action="/register/admin" enctype="multipart/form-data" >
             {{ csrf_field() }}
-            <div class="pr-4" style="overflow-y: scroll; height: 470px">
 
             <div class="form-sr">
                     <label for="username" class="text-muted">Username</label>
@@ -49,11 +48,10 @@
 
 			<div class="form-sr">
 				<button type="submit" class="btn btn-secondary btn-lg transition-fade text-light btn-block mt-3"><strong>Register</strong></button>
-				<input type="button" class="btn btn-secondary mt-3 btn-outline-secondary" value="Back" onclick="window.location.href='../../login'" style="width: 100px"/>
+				<a role="button" class="btn btn-secondary mt-3 btn-outline-secondary float-right" value="Back" href="/login" style="width: 100px; color: #71b346;">Back<a/>
 			</div>
 
 			<div style="position: absolute; bottom: 320px; right: 200px;">
-			</div>
 		</form>
 	</div>
 </div>

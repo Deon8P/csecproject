@@ -36,7 +36,7 @@
 @section('content')
 
 <div class="" style="position: absolute; left: 0; right: 0;">
-                @if($applications != null)
+                @if(!$applications->isEmpty())
                 @include('manager.applications')
                 @else
                 <h1 class="text-center">No more applications to proccess.</h1>
