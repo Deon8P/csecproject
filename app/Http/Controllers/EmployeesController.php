@@ -24,13 +24,6 @@ class EmployeesController extends Controller
 
     public function update(Employee $username)
     {
-        $this->validate(request(), [
-            'name' => 'optional',
-            'managed_by' => 'optional',
-            'surname' => 'optional',
-            'leave_balance' => 'optional'
-        ]);
-
         if(name)
             Employee::updateFirstName($username, $name);
 

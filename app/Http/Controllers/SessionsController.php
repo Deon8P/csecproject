@@ -19,6 +19,25 @@ class SessionsController extends Controller
         return view('sessions.create');
     }
 
+    public function storeAdminSession()
+    {
+        $this->validate(request(), [
+            'username' => 'required|exists:admins,user_username',
+            'password' => 'required|min:6'
+        ]);
+
+        // Attempt user authentication
+        if (! auth()->attempt(request(['username', 'password']))) {
+            redirect('login')->withErrors([
+                'message' => 'Please check your credentials and try again'
+            ]);
+        }
+
+    	// If so sign them in
+    	//redirect to the dashboard
+        return redirect('admin');
+    }
+
     public function storeEmployeeSession()
     {
         $this->validate(request(), [

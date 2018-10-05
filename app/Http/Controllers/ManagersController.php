@@ -15,17 +15,7 @@ class ManagersController extends Controller
 
     public function index()
     {
-        $employees = Manager::getMyEmps();
         $applications = Leave::returnPending();
         return view('manager.index', compact('applications'));
-    }
-
-    public function update()
-    {
-        if(name)
-            Manager::updateFirstName(Auth::user()->username, $name);
-
-        if(surname)
-            Manager::updateLastName(Auth::user()->username, $surname);
     }
 }

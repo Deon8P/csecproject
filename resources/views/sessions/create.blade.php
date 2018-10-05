@@ -27,19 +27,27 @@
 <!-- Input For Login -->
 
     <ul class="pr-5 nav nav-pills mb-3 container form-sr" id="pills-tab" role="tablist">
+            
             <li class="nav-item">
-              <a class="nav-link active" id="pills-manager-tab" data-toggle="pill" href="#pills-manager" role="tab" aria-controls="pills-manager" aria-selected="true">Manager</a>
+              <a class="nav-link active" id="pills-admin-tab" data-toggle="pill" href="#pills-admin" role="tab" aria-controls="pills-admin" aria-selected="false">Admin</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" id="pills-manager-tab" data-toggle="pill" href="#pills-manager" role="tab" aria-controls="pills-manager" aria-selected="true">Manager</a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" id="pills-employee-tab" data-toggle="pill" href="#pills-employee" role="tab" aria-controls="pills-employee" aria-selected="false">Employee</a>
             </li>
           </ul>
+          
+        </ul>
 
             @include('layouts.errors')
 
           <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-manager" role="tabpanel" aria-labelledby="pills-manager-tab">@include('sessions.managerForm')</div>
+            <div class="tab-pane fade show active" id="pills-admin" role="tabpanel" aria-labelledby="pills-admin-tab">@include('sessions.adminForm')</div>
+            <div class="tab-pane fade show" id="pills-manager" role="tabpanel" aria-labelledby="pills-manager-tab">@include('sessions.managerForm')</div>
             <div class="tab-pane fade" id="pills-employee" role="tabpanel" aria-labelledby="pills-employee-tab">@include('sessions.empForm')</div>
           </div>
 </div>
