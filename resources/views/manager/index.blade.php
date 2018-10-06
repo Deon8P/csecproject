@@ -3,46 +3,30 @@
 <head>
 
     @section('style')
+    <link href="/css/reg-login.css" rel="stylesheet">
     @endsection
 
 </head>
 
 @section('nav')
-<!-- NavBar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Manager</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarColor03">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/manager/createLeaveType">Register Leave Type</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/manager/updateLeaveType">Update Leave Type</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout</a>
-            </li>
-        </ul>
-
-    </div>
-</nav>
-<!-- **************************************************************************************************************** -->
+<div class="topnav">
+    <a class="active" href="/manager">Home</a>
+    <a href="/manager/createLeaveType">Register Leave Type</a>
+    <a href="/manager/updateLeaveType">Update Leave Type</a>
+    <a href="/logout">Logout</a>
+  </div>
 @endsection
 
 @section('content')
 
-<div class="" style="position: absolute; left: 0; right: 0;">
                 @if(!$applications->isEmpty())
+                <div class="" style="position: absolute; top:10%; left: 0; right: 0;">
                 @include('manager.applications')
+                </div>
                 @else
-                <h1 class="text-center">No more applications to proccess.</h1>
+                <h1 class="text-center" style="color: #c5c5c5;">There are no applications to process, <br><a href="/manager/createLeaveType">perhaps add a new leave type?</a></h1>
                 @endif
 
-            </div>
 
 
 <!-- **************************************************************************************************************** -->

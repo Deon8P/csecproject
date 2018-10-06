@@ -53,6 +53,12 @@ class LeavesController extends Controller
             'endDate' => 'required|date'
         ]);
 
+        $leave_balance = Employee::where('id', Auth::user()->id)->pluck('leave_balance')->first();
+        if($leave_balance < request('period'))
+        {
+            return back()->with('status', 'You do not have that many days to take leave');
+        }
+
         Leave::create([
             'emp_username' => Auth::user()->username,
             'leave_type' => request('leave_type'),
@@ -76,14 +82,30 @@ class LeavesController extends Controller
         return back();
     }
 
-    public function updateLeaveStatus($id)
+    public function updateLeaveStatus($id, $username)
     {
         $this->validate(request(), [
             'status' => 'required'
         ]);
 
             Leave::updateLeaveStatus($id, request('status'));
+            if(request('status') == 'approved')
+            {
+                Employee::where('user_username', $username)->decrement('leave_balance', Leave::where('id', $id)->pluck('period')->first());
+            }
             return back();
+    }
+
+    public function destroyLeave($id)
+    {
+        if(Leave::getLeaveStatus($id) == 'approved')
+        {
+            Employee::where('user_username', Auth::user()->username)->increment('leave_balance', Leave::where('id', $id)->pluck('period')->first());
+        }
+
+        Leave::destroyLeave($id);
+
+         return back()->with('status', 'Your application was canceld and the cost refunded');
     }
 
     public function destroyLeaveType($type)

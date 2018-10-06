@@ -10,7 +10,7 @@
 <div class="container">
 	<div class="text-center" >
 
-		<h1 style="color: #71b346">Admin Register</h1>
+		<h1 style="color: #71b346">Admin Registration</h1>
 
 		<form class="form-sr" method="POST" action="/register/admin" enctype="multipart/form-data" >
             {{ csrf_field() }}

@@ -29,11 +29,11 @@
     <ul class=" nav nav-pills mb-3 container form-sr" id="pills-tab" role="tablist">
 
             <li class="nav-item">
-              <a class="nav-link btn-outline-success active" id="pills-admin-tab" data-toggle="pill" href="#pills-admin" role="tab" aria-controls="pills-admin" aria-selected="false">Admin</a>
+              <a class="nav-link btn-outline-success active mr-1" id="pills-admin-tab" data-toggle="pill" href="#pills-admin" role="tab" aria-controls="pills-admin" aria-selected="false">Admin</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link btn-secondary btn-outline-success" id="pills-manager-tab" data-toggle="pill" href="#pills-manager" role="tab" aria-controls="pills-manager" aria-selected="true">Manager</a>
+              <a class="nav-link btn-secondary btn-outline-success mr-1" id="pills-manager-tab" data-toggle="pill" href="#pills-manager" role="tab" aria-controls="pills-manager" aria-selected="true">Manager</a>
             </li>
 
             <li class="nav-item">

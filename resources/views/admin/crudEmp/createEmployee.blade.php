@@ -11,7 +11,7 @@
 @section('nav')
 <!-- NavBar -->
 <div class="topnav">
-        <a  href="/admin">Admin</a>
+        <a  href="/admin">Home</a>
         <a  href="/admin/register/manager">Register New Manager</a>
         <a href="/admin/update/managers">Update Managers</a>
         <a class="active" href="/admin/register/employee">Register New Employees</a>
@@ -24,7 +24,7 @@
 @section('content')
 @if(! $managers->isEmpty())
 <!-- Input For Creating Employee -->
-<form class="" method="POST" action="/register/employee" enctype="multipart/form-data" style="position: absolute; top:20%; left:0%; right:0%">
+<form class="" method="POST" action="/register/employee" enctype="multipart/form-data" style="position: absolute; top:10%; left:0%; right:0%">
         {{ csrf_field() }}
 
         <div class="form-group container">

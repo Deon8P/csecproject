@@ -12,7 +12,7 @@
 <!-- NavBar -->
 
 <div class="topnav">
-        <a  href="/admin">Admin</a>
+        <a  href="/admin">Home</a>
         <a class="active" href="/admin/register/manager">Register New Manager</a>
         <a href="/admin/update/managers">Update Managers</a>
         <a href="/admin/register/employee">Register New Employees</a>

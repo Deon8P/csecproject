@@ -21,4 +21,10 @@ class EmployeesController extends Controller
         $leaves = Leave::leaveHistory(Auth::user()->username);
         return view('employee.index', compact('leaves'));
     }
+
+    public function destroyLeave($username)
+    {
+        Leave::destroyLeave($username);
+    }
+
 }

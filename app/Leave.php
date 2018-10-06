@@ -18,6 +18,11 @@ class Leave extends Model
         return Leave::where('emp_username', $user_username)->orderBy('created_at', 'desc')->get();
     }
 
+    public static function getLeaveStatus($id)
+    {
+        return Leave::where('id', $id)->pluck('status')->first();
+    }
+
     public static function returnPending()
     {
         $users = Employee::select('user_username')->where('managed_by', '=', Auth::user()->username)->get()->toArray();
@@ -35,8 +40,8 @@ class Leave extends Model
         Leave::where('id', $id)->update(['status' => $status]);
     }
 
-    public static function destroyLeave($username)
+    public static function destroyLeave($id)
     {
-        Leave::where('emp_username', $username)->delete();
+        Leave::where('id', $id)->delete();
     }
 }

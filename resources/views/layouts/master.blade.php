@@ -32,5 +32,5 @@
     @yield('scripts')
 </div>
 </body>
-
+@include('layouts.status')
 </html>

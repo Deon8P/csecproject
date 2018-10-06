@@ -38,6 +38,11 @@ class RegistrationController extends Controller
             'surname' => request('surname'),
         ]);
 
+        User_Role::create([
+            'user_id' => DB::getPdo()->lastInsertId(),
+            'role)id' => 1
+        ]);
+
         auth()->login($user);
 
         return redirect('admin');
@@ -77,6 +82,11 @@ class RegistrationController extends Controller
             'leave_balance' => $leave_balance
         ]);
 
+        User_Role::create([
+            'user_id' => DB::getPdo()->lastInsertId(),
+            'role)id' => 3
+        ]);
+
         return back();
     }
 
@@ -100,6 +110,11 @@ class RegistrationController extends Controller
             'user_username' => request('username'),
             'name' => request('name'),
             'surname' => request('surname')
+        ]);
+
+        User_Role::create([
+            'user_id' => DB::getPdo()->lastInsertId(),
+            'role)id' => 2
         ]);
 
         return back();

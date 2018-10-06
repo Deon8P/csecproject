@@ -11,7 +11,7 @@
 @section('nav')
 <!-- NavBar -->
 <div class="topnav">
-    <a class="active" href="/admin">Admin</a>
+    <a class="active" href="/admin">Home</a>
     <a href="/admin/register/manager">Register New Manager</a>
     <a href="/admin/update/managers">Update Managers</a>
     <a href="/admin/register/employee">Register New Employees</a>

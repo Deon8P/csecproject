@@ -22,8 +22,8 @@ Route::get('/admin/update/managers', 'AdminsController@updateManagers');
 Route::get('/admin/update/employees', 'AdminsController@updateEmployees');
 Route::post('/update/manager/{username}', 'AdminsController@updateManager');
 Route::post('/update/employee/{username}', 'AdminsController@updateEmployee');
-Route::post('/delete/manager/{username}', 'AdminsController@destroyManager');
-Route::post('/delete/employee/{username}', 'AdminsController@destroyEmployee');
+Route::get('/delete/manager/{username}', 'AdminsController@destroyManager');
+Route::get('/delete/employee/{username}', 'AdminsController@destroyEmployee');
 
 
 //Manager
@@ -34,10 +34,11 @@ Route::get('/manager/updateLeaveType', 'LeavesController@updateLeaveTypeForm');
 Route::get('/manager/reloadLeaveTypes', 'LeavesController@reloadLeaveTypes');
 Route::post('/updateLeaveType/{type}', 'LeavesController@updateLeaveType');
 Route::get('/deleteLeaveType/{type}', 'LeavesController@destroyLeaveType');
-Route::post('/updateApplication/{id}', 'LeavesController@updateLeaveStatus');
+Route::post('/updateApplication/{id}/{username}', 'LeavesController@updateLeaveStatus');
 
 //Employee
 Route::get('/employee','EmployeesController@index')->name('employee');
+Route::get('/delete/application/{id}', 'LeavesController@destroyLeave');
 
 //Leave
 Route::get('/leave/apply', 'LeavesController@leaveApplication');

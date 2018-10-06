@@ -3,52 +3,36 @@
 <head>
 
         @section('style')
+        <link href="/css/reg-login.css" rel="stylesheet">
         @endsection
 
     </head>
 
 @section('nav')
-<!-- NavBar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Application Form</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarColor03">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/employee">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-<!-- **************************************************************************************************************** -->
+<div class="topnav">
+    <a href="/employee">Home</a>
+    <a class="active" href="/leave/apply">Apply Here</a>
+    <a href="/logout">Logout</a>
+  </div>
 @endsection
 
 @section('content')
 
-<!-- Input For Application form -->
+@if(! $leaves->isEmpty())
 <form class="form-sr" action="/leave/apply" method="POST" enctype="multipart/form-data" >
     {{ csrf_field() }}
-    <div class="container">
+    <div class="container" style="position: absolute;top: 20%; left: 0; right: 0;">
         <div class="container text-center">
         <div class="form-group container">
-        <legend>Apply for Leave</legend>
+        <h1 style="color: #71b346" >Apply for Leave</h1>
         </div>
 
         <!--Drop DownList -->
         <div class="form-group container">
-            <label>Please Select Leave Type</label>
-        </div >
-
-        <div class="form-group container">
+            <label class="text-muted">Please Select Leave Type</label>
             <select class="custom-select" name="leave_type" required>
                 @foreach($leaves as $leave)
-                <option value="{{ $leave->leave_type }}" name="{{ $leave->leave_type }}" id="{{ $leave->leave_type }}" selected >{{ $leave->leave_type }}</option>
+                <option value="{{ $leave->leave_type }}" name="{{ $leave->leave_type }}" id="{{ $leave->leave_type }}" >{{ $leave->leave_type }}</option>
                 @endforeach
             </select>
         </div>
@@ -56,25 +40,28 @@
         <div class="form-group container">
 
         <div class="input-daterange" id="datepicker">
-            <label>Start date for leave</label>
+            <label class="text-muted">Start date for leave</label>
 
-            <input type="text" class="input-sm form-control" name="startDate" id="startDate" required/>
+            <input type="text" class="input-sm form-control" name="startDate" id="startDate" style="text-align: center" min="" required/>
           <br>
-            <label>to</label>
+            <label style="color: #71b346">to</label>
           <br>
-            <label class="mt-4">End date for leave</label>
+            <label class="mt-4 text-muted">End date for leave</label>
 
-            <input type="text" class="input-sm form-control" name="endDate" id="endDate" required/>
+            <input type="text" class="input-sm form-control" name="endDate" id="endDate" style="text-align: center" max="" required/>
 
         </div>
     </div>
-        <div class="form-group container ">
-            <a href="/employee" class="btn btn-outline-danger float-left" role="button">Cancel</a>
-            <button class="btn btn-outline-success float-right" type="submit">Apply</button>
+        <div class="form-group container mt-5 ">
+            <button class="btn btn-outline-success float-left" style="width: 30%;" type="submit">Apply</button>
+            <a href="/employee" class="btn btn-outline-danger float-right" role="button">Cancel</a>
         </div>
         </div>
     </div>
 </form>
+@else
+<h1 class="text-center" style="color: #c5c5c5">There are currently no types of leave to apply for, <br><a href="/leave/apply">please refer to your manager.</a></h1>
+@endif
 
 <!-- **************************************************************************************************************** -->
 @endsection
@@ -96,5 +83,21 @@
             format: "yyyy-mm-dd",
             todayHighlight: true
         });
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        if(dd<10){
+                dd='0'+dd
+            }
+            if(mm<10){
+                mm='0'+mm
+            }
+
+        today = yyyy+'-'+mm+'-'+dd;
+        document.getElementById("startDate").setAttribute("min", today);
+
 </script>
+
 @endsection

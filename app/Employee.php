@@ -39,5 +39,6 @@ class Employee extends Model
     public static function destroy($username)
     {
         Employee::where('user_username', $username)->delete();
+        User::where('username', $username)->delete();
     }
 }

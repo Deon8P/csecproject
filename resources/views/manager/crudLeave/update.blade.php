@@ -3,53 +3,24 @@
 <head>
 
         @section('style')
+        <link href="/css/reg-login.css" rel="stylesheet">
         @endsection
 
     </head>
 
 @section('nav')
-<!-- NavBar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Admin / Edit Leave Type</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarColor03">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/manager">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-<!-- **************************************************************************************************************** -->
+<div class="topnav">
+    <a href="/manager">Home</a>
+    <a href="/manager/createLeaveType">Register Leave Type</a>
+    <a class="active" href="/manager/updateLeaveType">Update Leave Type</a>
+    <a href="/logout">Logout</a>
+  </div>
 @endsection
 
 @section('content')
 
-<!--Table to edit Leave-->
-<div class="card" >
-<table class="table table-hover" style="border: 1; width:100%">
-    <thead>
-    <tr class="table-dark">
-        <th scope="row">Leave Type</th>
-        <th scope="row">Status</th>
-        <th scope="row">Commit</th>
-        <th scope="row">Delete</th>
-    </tr>
-    </thead>
-    <tbody id="ContentBody">
         @include('manager.crudLeave.LeaveTypes')
-    </tbody>
 
-</table>
-</div>
-
-<!-- **************************************************************************************************************** -->
 @endsection
 
 

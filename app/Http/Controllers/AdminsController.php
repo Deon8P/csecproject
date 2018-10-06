@@ -38,7 +38,7 @@ class AdminsController extends Controller
 
     public function updateManagers()
     {
-        $Managers = Manager::get();
+        $managers = Manager::get();
         return view('admin.crudManager.updateManagers', compact('managers'));
     }
 
@@ -46,22 +46,22 @@ class AdminsController extends Controller
     {
         if(request('name'))
         {
-            Employee::updateFirstName($username, $name);
+            Employee::updateFirstName($username, request('name'));
         }
 
         if(request('surname'))
         {
-        Employee::updateLastName($username, $surname);
+        Employee::updateLastName($username, request('surname'));
         }
 
         if(request('managed_by'))
         {
-        Employee::updateManagedBy($username, $managerID);
+        Employee::updateManagedBy($username, request('managed_by'));
         }
 
         if(request('leave_balance'))
         {
-        Employee::updateLeaveBalance($username, $leave_balance);
+        Employee::updateLeaveBalance($username, request('leave_balance'));
         }
 
         return back();
@@ -69,14 +69,15 @@ class AdminsController extends Controller
 
     public function updateManager($username)
     {
+
         if(request('name'))
-            Manager::updateFirstName($username, $name);
+            Manager::updateFirstName($username, request('name'));
 
         if(request('surname'))
-            Manager::updateLastName($username, $surname);
+            Manager::updateLastName($username, request('surname'));
 
-        return back();
-    }
+            return back();
+        }
 
     public function destroyEmployee($username)
     {
