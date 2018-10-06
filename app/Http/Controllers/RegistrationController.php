@@ -8,7 +8,7 @@ use App\User;
 use App\Admin;
 use App\Manager;
 use App\Employee;
-use App\User_Role;
+use App\UserRole;
 
 class RegistrationController extends Controller
 {
@@ -39,7 +39,7 @@ class RegistrationController extends Controller
             'surname' => request('surname'),
         ]);
 
-        User_Role::create([
+        UserRole::create([
             'user_username' => request('username'),
             'role_id' => 1
         ]);
@@ -83,7 +83,7 @@ class RegistrationController extends Controller
             'leave_balance' => $leave_balance
         ]);
 
-        User_Role::create([
+        UserRole::create([
             'user_username' => request('username'),
             'role_id' => 3
         ]);
@@ -113,7 +113,7 @@ class RegistrationController extends Controller
             'surname' => request('surname')
         ]);
 
-        User_Role::create([
+        UserRole::create([
             'user_username' => request('username'),
             'role_id' => 2
         ]);

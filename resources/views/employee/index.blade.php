@@ -51,7 +51,7 @@
 </div>
 </table>
         @else
-        <h1 class="text-center" style="color: #c5c5c5">You currently have pending leave applications, <br><a href="/leave/apply">perhaps apply for leave first.</a></h1>
+        <h1 class="text-center" style="color: #c5c5c5">You currently have no pending leave applications, <br><a href="/leave/apply">perhaps apply for leave first.</a></h1>
         @endif
 
 <!-- ******************************************************************************************************************-->
