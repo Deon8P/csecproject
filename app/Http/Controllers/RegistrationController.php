@@ -8,6 +8,7 @@ use App\User;
 use App\Admin;
 use App\Manager;
 use App\Employee;
+use App\User_Role;
 
 class RegistrationController extends Controller
 {
@@ -39,8 +40,8 @@ class RegistrationController extends Controller
         ]);
 
         User_Role::create([
-            'user_id' => DB::getPdo()->lastInsertId(),
-            'role)id' => 1
+            'user_username' => request('username'),
+            'role_id' => 1
         ]);
 
         auth()->login($user);
@@ -83,8 +84,8 @@ class RegistrationController extends Controller
         ]);
 
         User_Role::create([
-            'user_id' => DB::getPdo()->lastInsertId(),
-            'role)id' => 3
+            'user_username' => request('username'),
+            'role_id' => 3
         ]);
 
         return back();
@@ -113,8 +114,8 @@ class RegistrationController extends Controller
         ]);
 
         User_Role::create([
-            'user_id' => DB::getPdo()->lastInsertId(),
-            'role)id' => 2
+            'user_username' => request('username'),
+            'role_id' => 2
         ]);
 
         return back();

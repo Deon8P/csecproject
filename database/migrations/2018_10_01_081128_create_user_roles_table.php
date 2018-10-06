@@ -17,15 +17,15 @@ class CreateUserRolesTable extends Migration
 
         Schema::create('user_roles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
+            $table->string('user_username');
             $table->integer('role_id')->unsigned();
             $table->timestamps();
         });
 
         Schema::table('user_roles', function(Blueprint $table)
         {
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->foreign('user_username')->references('username')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade')->onDelete('cascade');
         });
 
     }
