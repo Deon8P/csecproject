@@ -13,6 +13,7 @@
     <a href="/employee">Home</a>
     <a class="active" href="/leave/apply">Apply Here</a>
     <a href="/logout">Logout</a>
+    <a class="float-right active" color="#71b346">Leave Balance: {{ $leave_balance }}</a>
     <a href="#" class="float-right active" color="#71b346">{{ Auth::user()->username }}</a>
   </div>
 @endsection

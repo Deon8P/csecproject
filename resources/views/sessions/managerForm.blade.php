@@ -9,7 +9,7 @@
 
         <div class="form-sr">
             <h5 for="password" style="color: #71b346">Enter Password</h5>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required pattern=".{6,}">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}">
             <label style="color: #71b346"><input id="rememberManager" name="remember" value="false" type="checkbox" /> &nbsp;Remember me</label>
         </div>
 

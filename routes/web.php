@@ -1,5 +1,8 @@
 <?php
 
+//Email Verification Route
+//Auth::routes(['verify' => true]);
+
 //Home
 Route::get('/home', 'UsersController@checkRole');
 
@@ -27,17 +30,17 @@ Route::post('/update/manager/{username}', 'AdminsController@updateManager');
 Route::post('/update/employee/{username}', 'AdminsController@updateEmployee');
 Route::get('/delete/manager/{username}', 'AdminsController@destroyManager');
 Route::get('/delete/employee/{username}', 'AdminsController@destroyEmployee');
-
+Route::get('/admin/createLeaveType', 'LeavesController@createLeaveType');
+Route::post('/createLeaveType', 'LeavesController@storeLeaveType');
+Route::get('/admin/updateLeaveType', 'LeavesController@updateLeaveTypeForm');
+Route::get('/admin/reloadLeaveTypes', 'LeavesController@reloadLeaveTypes');
+Route::post('/updateLeaveType/{type}', 'LeavesController@updateLeaveType');
+Route::get('/deleteLeaveType/{type}', 'LeavesController@destroyLeaveType');
 
 //Manager
 Route::get('/manager','ManagersController@index')->name('manager');
-Route::get('/manager/createLeaveType', 'LeavesController@createLeaveType');
-Route::post('/createLeaveType', 'LeavesController@storeLeaveType');
-Route::get('/manager/updateLeaveType', 'LeavesController@updateLeaveTypeForm');
-Route::get('/manager/reloadLeaveTypes', 'LeavesController@reloadLeaveTypes');
-Route::post('/updateLeaveType/{type}', 'LeavesController@updateLeaveType');
-Route::get('/deleteLeaveType/{type}', 'LeavesController@destroyLeaveType');
 Route::post('/updateApplication/{id}/{username}', 'LeavesController@updateLeaveStatus');
+Route::get('/manager/application/history', 'ManagersController@applicationHistory');
 
 //Employee
 Route::get('/employee','EmployeesController@index')->name('employee');

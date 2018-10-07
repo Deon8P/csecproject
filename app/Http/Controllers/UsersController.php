@@ -55,7 +55,7 @@ class UsersController extends Controller
     {
         try {
             if (Auth::check()) {
-                $role_id = UserRole::where('user_username', Auth::user()->username)->pluck('role_id')->first();
+                $role_id = Auth::user()->role;
             } else {
                 $role_id = null;
             }

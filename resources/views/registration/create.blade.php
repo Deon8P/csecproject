@@ -16,18 +16,18 @@
             {{ csrf_field() }}
 
             <div class="form-group pb-3 pt-3 ">
-                    <label for="username" class="text-muted">Username <br><label style="color: #71b346;">* Must be at least 2 characters long, start with a letter and be alpha-numeric (only numbers and/or letters), max-length: 21. *</label></label>
-                    <input type="text" class="form-control transition-fade" style="text-align: center" id="username" name="username" placeholder="Username" required pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$">
-                </div>
+                <label for="username" class="text-muted">Username <br><label style="color: #71b346;">* Must be at least 2 characters long, start with a letter and be alpha-numeric (only numbers and/or letters), max-length: 21. *</label></label>
+                <input type="text" class="form-control transition-fade" style="text-align: center" id="username" name="username" placeholder="Username" required pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$">
+            </div>
 
 			<div class="form-group pb-3">
 				<label for="name" class="text-muted">Name</label>
-				<input type="text" class="form-control transition-fade" style="text-align: center"  id="name" name="name" placeholder="Name" required pattern="[A-Za-z]{2,}">
+				<input type="text" class="form-control transition-fade" style="text-align: center"  id="name" name="name" placeholder="Name" required pattern="[A-Za-z ‘-]{2,}">
 			</div>
 
 			<div class="form-group pb-3">
 				<label for="surname" class="text-muted">Surname</label>
-				<input type="text" class="form-control transition-fade" style="text-align: center"  id="surname" name="surname" placeholder="Surname" required pattern="[A-Za-z]{2,}">
+				<input type="text" class="form-control transition-fade" style="text-align: center"  id="surname" name="surname" placeholder="Surname" required pattern="[A-Za-z ‘-]{2,}">
 			</div>
 
 			<div class="form-group pb-3">
@@ -42,7 +42,7 @@
 
 			<div class="form-group pb-3">
 				<label for="password_confirmation " class="text-muted">Password confirmation</label>
-				<input type="password" class="form-control transition-fade" style="text-align: center"  id="password_confirmation" name="password_confirmation" placeholder="Password confirmation" required pattern=".{6,}">
+				<input type="password" class="form-control transition-fade" style="text-align: center"  id="password_confirmation" name="password_confirmation" placeholder="Password confirmation" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}">
             </div>
             </div>
 

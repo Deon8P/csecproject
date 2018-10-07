@@ -6,7 +6,6 @@ use App\Admin;
 use App\Employee;
 use App\Manager;
 use App\User;
-use App\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,6 +31,7 @@ class RegistrationController extends Controller
                 'username' => request('username'),
                 'email' => request('email'),
                 'password' => bcrypt(request('password')),
+                'role' => 1,
             ]);
 
             Admin::create([
@@ -40,100 +40,98 @@ class RegistrationController extends Controller
                 'surname' => request('surname'),
             ]);
 
-            UserRole::create([
-                'user_username' => request('username'),
-                'role_id' => 1,
-            ]);
-
-            auth()->login($user);
+            //For instant login after registration
+            //auth()->login($user);
 
         } catch (ModelNotFoundException $exception) {
             return back()->withError($exception->getMessage())->withInput();
         }
+        return redirect('login')->with('status', 'You have been sent an email verification.');
 
-        if(Auth::user() != null)
-        {
-            Session::swapping(Auth::user());
-        }
-        return redirect('admin');
-
-    }
-
-    public function storeEmployee()
-    {
-        try {
-            $this->validate(request(), [
-                'username' => 'required|unique:users,username',
-                'name' => 'required|min:2',
-                'surname' => 'required|min:2',
-                'email' => 'required|email|unique:users,email',
-                'managed_by' => 'required',
-                'password' => 'required|confirmed|min:6',
-            ]);
-
-            User::create([
-                'username' => request('username'),
-                'email' => request('email'),
-                'password' => bcrypt(request('password')),
-            ]);
-
-            if (request('leave_balance') != null) {
-                $leave_balance = request('leave_balance');
-            } else {
-                $leave_balance = 30;
-            }
-            Employee::create([
-                'user_username' => request('username'),
-                'managed_by' => request('managed_by'),
-                'name' => request('name'),
-                'surname' => request('surname'),
-                'leave_balance' => $leave_balance,
-            ]);
-
-            UserRole::create([
-                'user_username' => request('username'),
-                'role_id' => 3,
-            ]);
-
-        } catch (ModelNotFoundException $exception) {
-            return back()->withError($exception->getMessage())->withInput();
-        }
-
-        return back();
     }
 
     public function storeManager()
     {
-        try {
-            $this->validate(request(), [
-                'username' => 'required|unique:users,username',
-                'name' => 'required|min:2',
-                'surname' => 'required|min:2',
-                'email' => 'required|email|unique:users,email',
-                'password' => 'required|confirmed|min:6',
-            ]);
+        if (Auth::check()) {
 
-            User::create([
-                'username' => request('username'),
-                'email' => request('email'),
-                'password' => bcrypt(request('password')),
-            ]);
+            if (User::role() == 1) {
+                try {
+                    $this->validate(request(), [
+                        'username' => 'required|unique:users,username',
+                        'name' => 'required|min:2',
+                        'surname' => 'required|min:2',
+                        'email' => 'required|email|unique:users,email',
+                        'password' => 'required|confirmed|min:6',
+                    ]);
 
-            Manager::create([
-                'user_username' => request('username'),
-                'name' => request('name'),
-                'surname' => request('surname'),
-            ]);
+                    User::create([
+                        'username' => request('username'),
+                        'email' => request('email'),
+                        'password' => bcrypt(request('password')),
+                        'role' => 2,
+                    ]);
 
-            UserRole::create([
-                'user_username' => request('username'),
-                'role_id' => 2,
-            ]);
+                    Manager::create([
+                        'user_username' => request('username'),
+                        'name' => request('name'),
+                        'surname' => request('surname'),
+                    ]);
 
-        } catch (ModelNotFoundException $exception) {
-            return back()->withError($exception->getMessage())->withInput();
+                } catch (ModelNotFoundException $exception) {
+                    return back()->withError($exception->getMessage())->withInput();
+                }
+
+                return back()->with('status', 'The manager has been registered and sent an email verification.');
+            }else{
+                return back()->with('status', 'You do not have permission to acess that!');
+            }
         }
-
-        return back();
     }
+
+    public function storeEmployee()
+    {
+        if (Auth::check()) {
+
+            if (User::role() == 1) {
+                try {
+                    $this->validate(request(), [
+                        'username' => 'required|unique:users,username',
+                        'name' => 'required|min:2',
+                        'surname' => 'required|min:2',
+                        'email' => 'required|email|unique:users,email',
+                        'managed_by' => 'required',
+                        'password' => 'required|confirmed|min:6',
+                    ]);
+
+                    User::create([
+                        'username' => request('username'),
+                        'email' => request('email'),
+                        'password' => bcrypt(request('password')),
+                        'role' => 3,
+                    ]);
+
+                    if (request('leave_balance') != null) {
+                        $leave_balance = request('leave_balance');
+                    } else {
+                        $leave_balance = 30;
+                    }
+                    Employee::create([
+                        'user_username' => request('username'),
+                        'managed_by' => request('managed_by'),
+                        'name' => request('name'),
+                        'surname' => request('surname'),
+                        'leave_balance' => $leave_balance,
+                    ]);
+
+                } catch (ModelNotFoundException $exception) {
+                    return back()->withError($exception->getMessage())->withInput();
+                }
+
+                return back()->with('status', 'The employee has been registered and sent an email verification.');
+            }else{
+                return back()->with('status', 'You do not have permission to acess that!');
+            }
+        }
+    }
+
 }

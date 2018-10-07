@@ -1,17 +1,17 @@
 <h1 class="text-center mb-4" style="color: #71b346">Applications For Leave</h1>
 
-<input  id="myInput" class="form-control text-center ml-2 mt-5 mb-3" type="text" placeholder="Search for a username..." onkeyup="searchFunction()" style="width: 30%">
+<input  id="myInput" class="form-control text-center ml-2 mt-5 mb-3" type="text" placeholder="Search for a username..." onkeyup="searchUsername()" style="width: 30%">
 
-<table id="myTable" class="table table-hover table-sm mt-1">
+<table id="myTable" class="table table-hover">
                         <thead >
                         <tr class="">
-                            <th>Employee Username</th>
-                            <th>Leave Type</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Period</th>
-                            <th>Status</th>
-                            <th>Commit</th>
+                            <th onclick="sortTable(0)" style="cursor: pointer">Employee Username</th>
+                            <th onclick="sortTable(1)" style="cursor: pointer">Leave Type</th>
+                            <th onclick="sortTable(2)" style="cursor: pointer">Start Date</th>
+                            <th onclick="sortTable(3)" style="cursor: pointer">End Date</th>
+                            <th onclick="sortTable(4)" style="cursor: pointer">Period</th>
+                            <th onclick="sortTable(5)" style="cursor: pointer">Status</th>
+                            <th onclick="sortTable(6)" style="cursor: pointer">Commit</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -36,7 +36,6 @@
                             </td>
                         </form>
                     </tr>
-
-                    @endforeach
+                @endforeach
                 </tbody>
                 </table>

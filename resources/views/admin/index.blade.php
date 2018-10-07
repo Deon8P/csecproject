@@ -12,12 +12,14 @@
 <!-- NavBar -->
 <div class="topnav">
     <a class="active" href="/admin">Home</a>
+    <a href="/admin/createLeaveType">Register Leave Type</a>
+    <a href="/admin/updateLeaveType">Update Leave Type</a>
     <a href="/admin/register/manager">Register New Manager</a>
     <a href="/admin/update/managers">Update Managers</a>
     <a href="/admin/register/employee">Register New Employees</a>
     <a href="/admin/update/employees">Update Employee</a>
     <a href="/logout">Logout</a>
-    <a href="#" class="float-right active" color="#71b346">{{ Auth::user()->username }}</a>
+    <a href="#" class="float-right active" color="#71b346" data-toggle="modal" data-target="#settingsModal">{{ Auth::user()->username }}</a>
   </div>
 <!-- **************************************************************************************************************** -->
 @endsection

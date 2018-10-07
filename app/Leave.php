@@ -18,6 +18,19 @@ class Leave extends Model
         return Leave::where('emp_username', $user_username)->orderBy('created_at', 'desc')->get();
     }
 
+    public static function managedApplications()
+    {
+        $users = Employee::select('user_username')->where('managed_by', '=', Auth::user()->username)->get()->toArray();
+
+        $applications = DB::table('leaves')
+        ->whereIn('emp_username', $users)
+        ->where('status', '=', 'approved')
+        ->orWhere('status', '=', 'rejected')
+        ->get();
+
+        return $applications;
+    }
+
     public static function getLeaveStatus($id)
     {
         return Leave::where('id', $id)->pluck('status')->first();

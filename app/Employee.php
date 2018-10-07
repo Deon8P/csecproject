@@ -11,6 +11,11 @@ class Employee extends Model
        'user_username', 'managed_by', 'name', 'surname', 'leave_balance'
     ];
 
+    public static function getLeaveBalance($username)
+    {
+        return Employee::where('user_username', $username)->pluck('leave_balance')->first();
+    }
+
     public static function updateFirstName($username, $name)
     {
         Employee::where('user_username', $username)->update(['name' => $name]);

@@ -39,7 +39,6 @@
             <li class="nav-item">
               <a class="nav-link btn-secondary btn-outline-success" id="pills-employee-tab" data-toggle="pill" href="#pills-employee" role="tab" aria-controls="pills-employee" aria-selected="false">Employee</a>
             </li>
-          </ul>
 
         </ul>
 

@@ -34,13 +34,18 @@ class SessionsController extends Controller
                 ]);
             }
 
+           /* if(Auth::user()->flag != 1){
+                Auth::logout();
+                return redirect()
+                            ->route('login')
+                            ->with('status', 'You have not yet confirmed your email yet. ');
+            }*/
 
         } catch (ModelNotFoundException $exception) {
             return back()->withError($exception->getMessage())->withInput();
         }
 
-        if(Auth::user() == null)
-        {
+        if (Auth::user() == null) {
             Session::swapping(Auth::user());
         }
         // If so sign them in
@@ -62,14 +67,19 @@ class SessionsController extends Controller
                     'message' => 'Please check your credentials and try again',
                 ]);
             }
-
+/*
+            if(Auth::user()->flag != 1){
+                Auth::logout();
+                return redirect()
+                            ->route('login')
+                            ->with('status', 'You have not yet confirmed your email yet. ');
+            }*/
 
         } catch (ModelNotFoundException $exception) {
             return back()->withError($exception->getMessage())->withInput();
         }
 
-        if(Auth::user() == null)
-        {
+        if (Auth::user() == null) {
             Session::swapping(Auth::user());
         }
         // If so sign them in
@@ -91,14 +101,19 @@ class SessionsController extends Controller
                     'message' => 'Please check your credentials and try again',
                 ]);
             }
-
+            /*
+            if(Auth::user()->flag != 1){
+                Auth::logout();
+                return redirect()
+                            ->route('login')
+                            ->with('status', 'You have not yet confirmed your email yet. ');
+            }*/
 
         } catch (ModelNotFoundException $exception) {
             return back()->withError($exception->getMessage())->withInput();
         }
 
-        if(Auth::user() == null)
-        {
+        if (Auth::user() == null) {
             Session::swapping(Auth::user());
         }
         // If so sign them in
@@ -107,13 +122,19 @@ class SessionsController extends Controller
     }
 
     public function destroy()
-    {
-        try {
-            Auth::logout();
+    {if (Auth::check()) {
+        $role = User::role();
+        if ($role == 1 || $role == 2 || $role == 3) {
+            try {
+                Auth::logout();
 
-        } catch (ModelNotFoundException $exception) {
-            return back()->withError($exception->getMessage())->withInput();
+            } catch (ModelNotFoundException $exception) {
+                return back()->withError($exception->getMessage())->withInput();
+            }
+            return redirect('/login');
+        }else{
+            return back()->with('status', 'You do not have permission to acess that!');
         }
-        return redirect('/login');
+    }
     }
 }

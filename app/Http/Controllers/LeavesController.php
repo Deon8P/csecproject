@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Employee;
 use App\Leave;
 use App\LeaveType;
@@ -14,151 +15,236 @@ class LeavesController extends Controller
 
     public function leaveApplication()
     {
-        try {
-            $leaves = LeaveType::getActiveLeave();
-        } catch (ModelNotFoundException $exception) {
-            return back()->withError($exception->getMessage())->withInput();
-        }
+        if (Auth::check()) {
 
-        return view('employee.leave.application', compact('leaves'));
+            if (User::role() == 3) {
+                try {
+                    $leaves = LeaveType::getActiveLeave();
+                    $leave_balance = Employee::getLeaveBalance(Auth::user()->username);
+                } catch (ModelNotFoundException $exception) {
+                    return back()->withError($exception->getMessage())->withInput();
+                }
+
+                return view('employee.leave.application', compact('leaves', 'leave_balance'));
+            }else{
+                return back()->with('status', 'You do not have permission to access that!');
+            }
+        }
     }
 
     public function createLeaveType()
     {
-        return view('manager.crudLeave.create');
+        if (Auth::check()) {
+
+            if (User::role() == 1) {
+                return view('admin.crudLeave.create');
+            }else{
+                return back()->with('status', 'You do not have permission to access that!');
+            }
+        }
     }
 
     public function updateLeaveTypeForm()
     {
-        try {
-            $leaveTypes = LeaveType::getAllLeaveTypes();
-        } catch (ModelNotFoundException $exception) {
-            return back()->withError($exception->getMessage())->withInput();
-        }
+        if (Auth::check()) {
 
-        return view('manager.crudLeave.update', compact('leaveTypes'));
+            if (User::role() == 1) {
+                try {
+                    $leaveTypes = LeaveType::getAllLeaveTypes();
+                } catch (ModelNotFoundException $exception) {
+                    return back()->withError($exception->getMessage())->withInput();
+                }
+
+                return view('admin.crudLeave.update', compact('leaveTypes'));
+            }else{
+                return back()->with('status', 'You do not have permission to access that!');
+            }
+        }
     }
 
     public function storeLeaveType()
     {
-        try {
-            $this->validate(request(), [
-                'leave_type' => 'required|min:3',
-                'status' => 'required',
-            ]);
+        if (Auth::check()) {
 
-            LeaveType::create([
-                'leave_type' => request('leave_type'),
-                'status' => request('status'),
-            ]);
+            if (User::role() == 1) {
+                try {
+                    $this->validate(request(), [
+                        'leave_type' => 'required|min:3',
+                        'status' => 'required',
+                    ]);
 
-        } catch (ModelNotFoundException $exception) {
-            return back()->withError($exception->getMessage())->withInput();
+                    LeaveType::create([
+                        'leave_type' => request('leave_type'),
+                        'status' => request('status'),
+                    ]);
+
+                } catch (ModelNotFoundException $exception) {
+                    return back()->withError($exception->getMessage())->withInput();
+                }
+
+                return back()->with('status', 'The new leave type has been created.');
+            }else{
+                return back()->with('status', 'You do not have permission to access that!');
+            }
         }
-
-        return back();
     }
 
     public function storeApplication(Request $request)
     {
-        try {
-            $this->validate(request(), [
-                'leave_type' => 'required',
-                'startDate' => 'required|date',
-                'endDate' => 'required|date',
-            ]);
+        if (Auth::check()) {
 
-            $leave_balance = Employee::where('id', Auth::user()->id)->pluck('leave_balance')->first();
-            if ($leave_balance < request('period')) {
-                return back()->with('status', 'You do not have that many days to take leave');
+            if (User::role() == 3) {
+                try {
+                    $this->validate(request(), [
+                        'leave_type' => 'required',
+                        'startDate' => 'required|date',
+                        'endDate' => 'required|date',
+                    ]);
+
+                    $period = (abs((strtotime(request('startDate')) - strtotime(request('endDate'))) / 60 / 60 / 24) + 1);
+
+                    $balance = Employee::where('user_username', Auth::user()->username)->pluck('leave_balance')->first();
+
+                    if ($balance < $period) {
+                        return back()->with('status', 'You do not have that many days to take leave.');
+                    }
+
+                    Leave::create([
+                        'emp_username' => Auth::user()->username,
+                        'leave_type' => request('leave_type'),
+                        'startDate' => Carbon::createFromFormat('Y-m-d', request('startDate')),
+                        'endDate' => Carbon::createFromFormat('Y-m-d', request('endDate')),
+                        'period' => $period,
+                        'status' => 'pending',
+                    ]);
+                } catch (ModelNotFoundException $exception) {
+                    return back()->withError($exception->getMessage())->withInput();
+                }
+
+                return back()->with('status', 'The application has been created.');
+            }else{
+                return back()->with('status', 'You do not have permission to access that!');
             }
-
-            Leave::create([
-                'emp_username' => Auth::user()->username,
-                'leave_type' => request('leave_type'),
-                'startDate' => Carbon::createFromFormat('Y-m-d', request('startDate')),
-                'endDate' => Carbon::createFromFormat('Y-m-d', request('endDate')),
-                'period' => (abs((strtotime(request('startDate')) - strtotime(request('endDate'))) / 60 / 60 / 24) + 1),
-                'status' => 'pending',
-            ]);
-        } catch (ModelNotFoundException $exception) {
-            return back()->withError($exception->getMessage())->withInput();
         }
-
-        return back();
     }
 
     public function updateLeaveType($type)
     {
-        try {
-            if (request('leave_type') != null) {
-                LeaveType::updateLeaveType($type, request('leave_type'));
-            }
+        if (Auth::check()) {
 
-            if (request('status') != null) {
-                LeaveType::updateLeaveStatus($type, request('status'));
-            }
+            if (User::role() == 1) {
+                try {
+                    if (request('leave_type') != null) {
+                        LeaveType::updateLeaveType($type, request('leave_type'));
+                    }
 
-        } catch (ModelNotFoundException $exception) {
-            return back()->withError($exception->getMessage())->withInput();
+                    if (request('status') != null) {
+                        LeaveType::updateLeaveStatus($type, request('status'));
+                    }
+
+                } catch (ModelNotFoundException $exception) {
+                    return back()->withError($exception->getMessage())->withInput();
+                }
+
+                return back()->with('status', 'The leave type has been updated.');
+            }else{
+                return back()->with('status', 'You do not have permission to access that!');
+            }
         }
-
-        return back();
     }
 
     public function updateLeaveStatus($id, $username)
     {
-        try {
-            $this->validate(request(), [
-                'status' => 'required',
-            ]);
+        if (Auth::check()) {
 
-            Leave::updateLeaveStatus($id, request('status'));
-            if (request('status') == 'approved') {
-                Employee::where('user_username', $username)->decrement('leave_balance', Leave::where('id', $id)->pluck('period')->first());
+            if (User::role() == 2) {
+                try {
+                    $this->validate(request(), [
+                        'status' => 'required',
+                    ]);
+
+                    if (request('status') == 'approved') {
+
+                        $balance = Employee::where('user_username', $username)->pluck('leave_balance')->first();
+
+                        $cost = Leave::where('id', $id)->pluck('period')->first();
+
+                        if ($cost < $balance){
+                            Employee::where('user_username', $username)->decrement('leave_balance', $cost);
+                        }else{
+                            return back()->with('status', 'The cost of that application is to large!');
+                        }
+
+                    }
+                    Leave::updateLeaveStatus($id, request('status'));
+
+                } catch (ModelNotFoundException $exception) {
+                    return back()->withError($exception->getMessage())->withInput();
+                }
+                return back()->with('status', 'The status of the application has been set.');
+            }else{
+                return back()->with('status', 'You do not have permission to access that!');
             }
-
-        } catch (ModelNotFoundException $exception) {
-            return back()->withError($exception->getMessage())->withInput();
         }
-        return back();
     }
 
     public function destroyLeave($id)
     {
-        try {
-            if (Leave::getLeaveStatus($id) == 'approved') {
-                Employee::where('user_username', Auth::user()->username)->increment('leave_balance', Leave::where('id', $id)->pluck('period')->first());
+        if (Auth::check()) {
+
+            if (User::role() == 3) {
+
+                try {
+                    if (Leave::getLeaveStatus($id) == 'approved') {
+                        Employee::where('user_username', Auth::user()->username)->increment('leave_balance', Leave::where('id', $id)->pluck('period')->first());
+                    }
+
+                    Leave::destroyLeave($id);
+
+                } catch (ModelNotFoundException $exception) {
+                    return back()->withError($exception->getMessage())->withInput();
+                }
+
+                return back()->with('status', 'Your application was canceled and the cost refunded');
+            }else{
+                return back()->with('status', 'You do not have permission to access that!');
             }
-
-            Leave::destroyLeave($id);
-
-        } catch (ModelNotFoundException $exception) {
-            return back()->withError($exception->getMessage())->withInput();
         }
-
-        return back()->with('status', 'Your application was canceld and the cost refunded');
     }
 
     public function destroyLeaveType($type)
     {
-        try {
-            LeaveType::destroyLeaveType($type);
+        if (Auth::check()) {
 
-        } catch (ModelNotFoundException $exception) {
-            return back()->withError($exception->getMessage())->withInput();
+            if (User::role() == 1) {
+                try {
+                    LeaveType::destroyLeaveType($type);
+
+                } catch (ModelNotFoundException $exception) {
+                    return back()->withError($exception->getMessage())->withInput();
+                }
+                return back()->with('status', 'The leave type has been removed.');
+            }else{
+                return back()->with('status', 'You do not have permission to access that!');
+            }
         }
-        return back();
     }
 
     public function reloadLeaveTypes()
     {
-        try {
-            $leaveTypes = LeaveType::getAllLeaveTypes();
+        if (Auth::check()) {
 
-        } catch (ModelNotFoundException $exception) {
-            return back()->withError($exception->getMessage())->withInput();
+            if (User::role() == 1) {
+                try {
+                    $leaveTypes = LeaveType::getAllLeaveTypes();
+
+                } catch (ModelNotFoundException $exception) {
+                    return back()->withError($exception->getMessage())->withInput();
+                }
+                return view('admin.crudLeave.LeaveTypes', compact('leaveTypes'));
+            }else{
+                return back()->with('status', 'You do not have permission to access that!');
+            }
         }
-        return view('manager.crudLeave.LeaveTypes', compact('leaveTypes'));
     }
 }

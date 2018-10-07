@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -15,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password',
+        'username', 'email', 'password', 'role', 'flag'
     ];
 
     /**
@@ -27,9 +29,25 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    //Accessor and mutator for email verification
+    public function getFlag()
+    {
+        return $this->flag;
+    }
+
+    public function setFlag($value)
+    {
+        $this->flag = $value;
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public static function role()
+    {
+        return User::where('username', Auth::user()->username)->pluck('role')->first();
     }
 
     public function authorizeRoles($roles)

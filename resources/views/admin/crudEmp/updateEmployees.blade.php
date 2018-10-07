@@ -12,6 +12,8 @@
 <!-- NavBar -->
 <div class="topnav">
         <a  href="/admin">Home</a>
+        <a href="/admin/createLeaveType">Register Leave Type</a>
+        <a href="/admin/updateLeaveType">Update Leave Type</a>
         <a  href="/admin/register/manager">Register New Manager</a>
         <a href="/admin/update/managers">Update Managers</a>
         <a href="/admin/register/employee">Register New Employee</a>
@@ -25,7 +27,7 @@
 @section('content')
 
 <!--Table to edit Leave-->
-<div style="position: absolute; top:15%; left:0%; right:0%">
+<div >
 @if(! $employees->isEmpty())
 <table class="table table-hover" style="position: absolute; top:15%; left:0%; right:0%">
     <thead>
@@ -46,8 +48,8 @@
         {{ csrf_field() }}
 
         <td><label style="color: white" type="text" id="name{{ $employee->user_username }}" name="username">{{ $employee->user_username }}</label></td>
-        <td><input class="form-control" type="text" id="name_{{ $employee->name }}" name="name" placeholder="{{ $employee->name }}" pattern="[A-Za-z]{2,}"></td>
-        <td><input class="form-control" type="text" id="surname_{{ $employee->surname }}" name="surname" placeholder="{{ $employee->surname }}" pattern="[A-Za-z]{2,}"></td>
+        <td><input class="form-control" type="text" id="name_{{ $employee->name }}" name="name" placeholder="{{ $employee->name }}" pattern="[A-Za-z ‘-]{2,}""></td>
+        <td><input class="form-control" type="text" id="surname_{{ $employee->surname }}" name="surname" placeholder="{{ $employee->surname }}" pattern="[A-Za-z ‘-]{2,}""></td>
         <td><input class="form-control" type="text" id="leave_balance_{{ $employee->leave_balance }}" name="leave_balance" placeholder="{{ $employee->leave_balance }}" onkeyup="handleChange(this);">
 
         </td>

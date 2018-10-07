@@ -12,6 +12,8 @@
 <!-- NavBar -->
 <div class="topnav">
         <a  href="/admin">Home</a>
+        <a href="/admin/createLeaveType">Register Leave Type</a>
+        <a href="/admin/updateLeaveType">Update Leave Type</a>
         <a  href="/admin/register/manager">Register New Manager</a>
         <a href="/admin/update/managers">Update Managers</a>
         <a class="active" href="/admin/register/employee">Register New Employees</a>
@@ -34,12 +36,12 @@
 
         <div class="form-group container ">
             <label for="name" class="text-muted">Name</label>
-            <input type="Text" class="form-control" id="name" name="name" placeholder="Enter employee name" required pattern="[A-Za-z]{2,}">
+            <input type="Text" class="form-control" id="name" name="name" placeholder="Enter employee name" required pattern="[A-Za-z ‘-]{2,}">
         </div>
 
         <div class="form-group container ">
             <label for="surname" class="text-muted">Surname</label>
-            <input type="Text" class="form-control" id="surname" name="surname" placeholder="Enter employee surname" required pattern="[A-Za-z]{2,}">
+            <input type="Text" class="form-control" id="surname" name="surname" placeholder="Enter employee surname" required pattern="[A-Za-z ‘-]{2,}">
         </div>
 
         <div class="form-group container">

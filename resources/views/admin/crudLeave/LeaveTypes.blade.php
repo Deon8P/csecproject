@@ -43,5 +43,5 @@
 
 </table>
     @else
-    <h1 class="text-center" style="color: #c5c5c5">There are no leave types to update, <br><a href="/manager/createLeaveType">perhaps add a new leave type?</a></h1>
+    <h1 class="text-center" style="color: #c5c5c5">There are no leave types to update, <br><a href="/admin/createLeaveType">perhaps add a new leave type?</a></h1>
     @endif

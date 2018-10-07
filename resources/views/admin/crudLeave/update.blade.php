@@ -10,9 +10,13 @@
 
 @section('nav')
 <div class="topnav">
-    <a href="/manager">Home</a>
-    <a href="/manager/createLeaveType">Register Leave Type</a>
-    <a class="active" href="/manager/updateLeaveType">Update Leave Type</a>
+    <a href="/admin">Home</a>
+    <a href="/admin/createLeaveType">Register Leave Type</a>
+    <a class="active" href="/admin/updateLeaveType">Update Leave Type</a>
+    <a href="/admin/register/manager">Register New Manager</a>
+    <a href="/admin/update/managers">Update Managers</a>
+    <a href="/admin/register/employee">Register New Employees</a>
+    <a href="/admin/update/employees">Update Employee</a>
     <a href="/logout">Logout</a>
     <a href="#" class="float-right active" color="#71b346">{{ Auth::user()->username }}</a>
   </div>
@@ -20,7 +24,7 @@
 
 @section('content')
 
-        @include('manager.crudLeave.LeaveTypes')
+        @include('admin.crudLeave.LeaveTypes')
 
 @endsection
 
@@ -35,7 +39,7 @@
                document.getElementById("ContentBody").innerHTML = this.responseText;
               }
             };
-            xhttp.open("GET", "/manager/reloadLeaveTypes", true);
+            xhttp.open("GET", "/admin/reloadLeaveTypes", true);
             xhttp.send();
           }
 
