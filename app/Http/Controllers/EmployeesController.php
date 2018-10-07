@@ -18,13 +18,22 @@ class EmployeesController extends Controller
 
     public function index()
     {
+        try{
         $leaves = Leave::leaveHistory(Auth::user()->username);
+        } catch (ModelNotFoundException $exception) {
+            return back()->withError($exception->getMessage())->withInput();
+        }
+
         return view('employee.index', compact('leaves'));
     }
 
     public function destroyLeave($username)
     {
+        try{
         Leave::destroyLeave($username);
+    } catch (ModelNotFoundException $exception) {
+        return back()->withError($exception->getMessage())->withInput();
+    }
     }
 
 }

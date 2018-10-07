@@ -4,12 +4,13 @@
 
         <div class="form-sr">
             <h5 for="username" style="color: #71b346">Manager Username</h5>
-            <input type="Text" class="form-control" id="username" name="username" placeholder="Username" required>
+            <input type="Text" class="form-control" id="username" name="username" placeholder="Username" required pattern=".{2,}">
         </div>
 
         <div class="form-sr">
             <h5 for="password" style="color: #71b346">Enter Password</h5>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required pattern=".{6,}">
+            <label style="color: #71b346"><input id="rememberManager" name="remember" value="false" type="checkbox" /> &nbsp;Remember me</label>
         </div>
 
         <!--Sign In Button -->

@@ -16,6 +16,7 @@
         <a href="/admin/register/employee">Register New Employee</a>
         <a  href="/admin/update/employees">Update Employees</a>
         <a href="/logout">Logout</a>
+        <a href="#" class="float-right active" color="#71b346">{{ Auth::user()->username }}</a>
       </div>
 @endsection
 
@@ -23,7 +24,7 @@
 
 <div style="position: absolute; top:15%; left:0%; right:0%">
 @if(! $managers->isEmpty())
-<table class="table" style="position: absolute; top:15%; left:0%; right:0%">
+<table class="table table-hover" style="position: absolute; top:15%; left:0%; right:0%">
     <thead>
     <tr class="">
         <th scope="row">Manager Username</th>
@@ -40,8 +41,8 @@
         {{ csrf_field() }}
 
         <td><label style="color: white" type="text" id="username{{ $manager->user_username }}" name="username">{{ $manager->user_username }}</label></td>
-        <td><input type="text" id="name{{ $manager->name }}" name="name" placeholder="{{ $manager->name }}" ></td>
-        <td><input type="text" id="surname{{ $manager->surname }}" name="surname" placeholder="{{ $manager->surname }}" ></td>
+        <td><input class="form-control" type="text" id="name{{ $manager->name }}" name="name" placeholder="{{ $manager->name }}" pattern="[A-Za-z]{2,}"></td>
+        <td><input class="form-control" type="text" id="surname{{ $manager->surname }}" name="surname" placeholder="{{ $manager->surname }}" pattern="[A-Za-z]{2,}" ></td>
         <td>
         <button type="submit" id="update{{ $manager->user_username }}" name="update" class="btn edit btn-outline-warning">Edit</button>
         </td>

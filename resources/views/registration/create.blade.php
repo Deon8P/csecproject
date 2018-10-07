@@ -7,7 +7,7 @@
 </head>
 
 @section('content')
-<div class="container">
+<div class="container" style="position: absolute; top:0%; left: 0; right: 0; bottom: 0%;">
 	<div class="text-center" >
 
 		<h1 style="color: #71b346">Admin Registration</h1>
@@ -16,18 +16,18 @@
             {{ csrf_field() }}
 
             <div class="form-sr">
-                    <label for="username" class="text-muted">Username</label>
-                    <input type="text" class="form-control transition-fade" id="username" name="username" placeholder="Username" required>
+                    <label for="username" class="text-muted">Username <label style="color: #71b346;">* Must be at least 2 characters long, start with a letter and be alpha-numeric (only numbers and/or letters), max-length: 21. *</label></label>
+                    <input type="text" class="form-control transition-fade" id="username" name="username" placeholder="Username" required pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$">
                 </div>
 
 			<div class="form-sr">
 				<label for="name" class="text-muted">Name</label>
-				<input type="text" class="form-control transition-fade" id="name" name="name" placeholder="Name" required>
+				<input type="text" class="form-control transition-fade" id="name" name="name" placeholder="Name" required pattern="[A-Za-z]{2,}">
 			</div>
 
 			<div class="form-sr">
 				<label for="surname" class="text-muted">Surname</label>
-				<input type="text" class="form-control transition-fade" id="surname" name="surname" placeholder="Surname" required>
+				<input type="text" class="form-control transition-fade" id="surname" name="surname" placeholder="Surname" required pattern="[A-Za-z]{2,}">
 			</div>
 
 			<div class="form-sr">
@@ -36,13 +36,13 @@
 			</div>
 
 			<div class="form-sr">
-				<label for="password " class="text-muted">Password</label>
-				<input type="password" class="form-control transition-fade" id="password" name="password" placeholder="Password" required>
+				<label for="password " class="text-muted">Password <label style="color: #71b346;">* Must be longer than 6 characters and contain at least one upper and lower case letter as well as a number. *</label></label>
+				<input type="password" class="form-control transition-fade" id="password" name="password" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}">
 			</div>
 
 			<div class="form-sr">
 				<label for="password_confirmation " class="text-muted">Password confirmation</label>
-				<input type="password" class="form-control transition-fade" id="password_confirmation" name="password_confirmation" placeholder="Password confirmation" required>
+				<input type="password" class="form-control transition-fade" id="password_confirmation" name="password_confirmation" placeholder="Password confirmation" required pattern=".{6,}">
             </div>
             </div>
 

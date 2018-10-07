@@ -2,20 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Manager;
 use App\Leave;
 
 class ManagersController extends Controller
 {
     public function __construct()
-	{
-		$this->middleware('auth');
+    {
+        $this->middleware('auth');
     }
 
     public function index()
     {
-        $applications = Leave::returnPending();
+        try {
+            $applications = Leave::returnPending();
+
+        } catch (ModelNotFoundException $exception) {
+            return back()->withError($exception->getMessage())->withInput();
+        }
         return view('manager.index', compact('applications'));
     }
 }

@@ -14,6 +14,7 @@
     <a href="/manager/createLeaveType">Register Leave Type</a>
     <a href="/manager/updateLeaveType">Update Leave Type</a>
     <a href="/logout">Logout</a>
+    <a href="#" class="float-right active" color="#71b346">{{ Auth::user()->username }}</a>
   </div>
 @endsection
 
@@ -26,8 +27,6 @@
                 @else
                 <h1 class="text-center" style="color: #c5c5c5;">There are no applications to process, <br><a href="/manager/createLeaveType">perhaps add a new leave type?</a></h1>
                 @endif
-
-
 
 <!-- **************************************************************************************************************** -->
 @endsection

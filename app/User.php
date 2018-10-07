@@ -76,4 +76,18 @@ class User extends Authenticatable
     {
         User::where('username', $id)->update(['password' => bcrypt($password)]);
     }
+
+    public function swapping($user) {
+        $new_sessid   = \Session::getId(); //get new session_id after user sign in
+        $last_session = \Session::getHandler()->read($user->last_sessid); // retrive last session
+
+        if ($last_session) {
+            if (\Session::getHandler()->destroy($user->last_sessid)) {
+                // session was destroyed
+            }
+        }
+
+        $user->last_sessid = $new_sessid;
+        $user->save();
+    }
 }

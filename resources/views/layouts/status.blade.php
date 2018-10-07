@@ -5,5 +5,8 @@
 		if(exist){
 			alert(message);
 		}
-	}
+    }
+    @if (session('error'))
+    <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
 </script>

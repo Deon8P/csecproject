@@ -17,6 +17,7 @@
         <a href="/admin/register/employee">Register New Employee</a>
         <a class="active" href="/admin/update/employees">Update Employees</a>
         <a href="/logout">Logout</a>
+        <a href="#" class="float-right active" color="#71b346">{{ Auth::user()->username }}</a>
       </div>
 <!-- **************************************************************************************************************** -->
 @endsection
@@ -26,7 +27,7 @@
 <!--Table to edit Leave-->
 <div style="position: absolute; top:15%; left:0%; right:0%">
 @if(! $employees->isEmpty())
-<table class="table" style="position: absolute; top:15%; left:0%; right:0%">
+<table class="table table-hover" style="position: absolute; top:15%; left:0%; right:0%">
     <thead>
     <tr class="">
         <th scope="row">Employee Username</th>
@@ -45,9 +46,11 @@
         {{ csrf_field() }}
 
         <td><label style="color: white" type="text" id="name{{ $employee->user_username }}" name="username">{{ $employee->user_username }}</label></td>
-        <td><input type="text" id="name_{{ $employee->name }}" name="name" placeholder="{{ $employee->name }}" ></td>
-        <td><input type="text" id="surname_{{ $employee->surname }}" name="surname" placeholder="{{ $employee->surname }}" ></td>
-        <td><input type="text" id="leave_balance_{{ $employee->leave_balance }}" name="leave_balance" placeholder="{{ $employee->leave_balance }}" ></td>
+        <td><input class="form-control" type="text" id="name_{{ $employee->name }}" name="name" placeholder="{{ $employee->name }}" pattern="[A-Za-z]{2,}"></td>
+        <td><input class="form-control" type="text" id="surname_{{ $employee->surname }}" name="surname" placeholder="{{ $employee->surname }}" pattern="[A-Za-z]{2,}"></td>
+        <td><input class="form-control" type="text" id="leave_balance_{{ $employee->leave_balance }}" name="leave_balance" placeholder="{{ $employee->leave_balance }}" onkeyup="handleChange(this);">
+
+        </td>
         <td>
                 <select class="custom-select" id="managed_by_{{ $employee->user_username }}" name="managed_by" required>
                     @foreach($managers as $manager)
@@ -78,4 +81,14 @@
 <h1 class="text-center"><a href="/admin/register/employee">Please register some employees first.</a></h1>
 @endif
 
+@endsection
+
+@section('scripts')
+<script>
+    function handleChange(input) {
+        if(isNaN(input.value)) input.value = "";
+        if (input.value < 0) input.value = 0;
+        if (input.value > 40) input.value = 40;
+    }
+</script>
 @endsection

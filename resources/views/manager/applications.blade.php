@@ -2,7 +2,7 @@
 
 <input  id="myInput" class="form-control text-center ml-2 mt-5 mb-3" type="text" placeholder="Search for a username..." onkeyup="searchFunction()" style="width: 30%">
 
-<table id="myTable" class="table table-hovertable-sm mt-1">
+<table id="myTable" class="table table-hover table-sm mt-1">
                         <thead >
                         <tr class="">
                             <th>Employee Username</th>

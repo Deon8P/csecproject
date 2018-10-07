@@ -2,30 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
-use App\File;
 use App\User;
+use App\UserRole;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
-	public function __construct()
-	{
-		$this->middleware('auth');
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
 
-	public function update($username)
+    public function update($username)
     {
-        if(request('username'))
-            User::updateUserName($username);
+        try {
+            if (request('username')) {
+                User::updateUserName($username);
+            }
 
-        if(request('email'))
-			User::updateEmail($username, $email);
+            if (request('email')) {
+                User::updateEmail($username, $email);
+            }
 
-		if(request('password'))
-            User::updatePassword($username, bcrypt($password));
+            if (request('password')) {
+                User::updatePassword($username, bcrypt($password));
+            }
+
+        } catch (ModelNotFoundException $exception) {
+            return back()->withError($exception->getMessage())->withInput();
+        }
 
         return back();
     }
@@ -37,6 +43,36 @@ class UsersController extends Controller
 
     public function destroy(User $username)
     {
-        Manager::where('username', $username)->delete();
+        try {
+            Manager::where('username', $username)->delete();
+
+        } catch (ModelNotFoundException $exception) {
+            return back()->withError($exception->getMessage())->withInput();
+        }
+    }
+
+    public function checkRole()
+    {
+        try {
+            if (Auth::check()) {
+                $role_id = UserRole::where('user_username', Auth::user()->username)->pluck('role_id')->first();
+            } else {
+                $role_id = null;
+            }
+
+            if ($role_id == 3) {
+                return redirect('/employee');
+            } else if ($role_id == 2) {
+                return redirect('/manager');
+            } else if ($role_id == 1) {
+                return redirect('/admin');
+            } else {
+                return redirect('/login');
+            }
+
+        } catch (ModelNotFoundException $exception) {
+            return back()->withError($exception->getMessage())->withInput();
+        }
+
     }
 }

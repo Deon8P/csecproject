@@ -17,6 +17,7 @@
         <a class="active" href="/admin/register/employee">Register New Employees</a>
         <a href="/admin/update/employees">Update Employee</a>
         <a href="/logout">Logout</a>
+        <a href="#" class="float-right active" color="#71b346">{{ Auth::user()->username }}</a>
       </div>
 <!-- **************************************************************************************************************** -->
 @endsection
@@ -33,17 +34,17 @@
 
         <div class="form-group container ">
             <label for="name" class="text-muted">Name</label>
-            <input type="Text" class="form-control" id="name" name="name" placeholder="Enter employee name" required>
+            <input type="Text" class="form-control" id="name" name="name" placeholder="Enter employee name" required pattern="[A-Za-z]{2,}">
         </div>
 
         <div class="form-group container ">
             <label for="surname" class="text-muted">Surname</label>
-            <input type="Text" class="form-control" id="surname" name="surname" placeholder="Enter employee surname" required>
+            <input type="Text" class="form-control" id="surname" name="surname" placeholder="Enter employee surname" required pattern="[A-Za-z]{2,}">
         </div>
 
         <div class="form-group container">
-            <label for="username" class="text-muted">Employee username</label>
-            <input type="Text" class="form-control" id="username" name="username" placeholder="Enter your employee username" required>
+            <label for="username" class="text-muted">Employee username <label style="color: #71b346;">* Must be at least 2 characters long, start with a letter and be alpha-numeric (only numbers and/or letters), max-length: 21. *</label></label>
+            <input type="Text" class="form-control" id="username" name="username" placeholder="Enter your employee username" required pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$">
         </div >
 
         <div class="form-group container">
@@ -65,14 +66,14 @@
             <input type="number" min="15" max="40" class="form-control" id="leave_balance" name="leave_balance" placeholder="Leave Balance (Default 30 days. Min:15 - Max:40)">
         </div>
 
-        <div class="form-group container" class="text-muted">
-            <label for="password" class="text-muted">Create password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+        <div class="form-group container">
+            <label for="password" class="text-muted">Create password <label style="color: #71b346;">* Must be longer than 6 characters and contain at least one upper and lower case letter as well as a number. *</label></label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}">
         </div>
 
         <div class="form-group container">
             <label for="password_confirmation" class="text-muted">Password confirmation</label>
-            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Password confirmation" required>
+            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Password confirmation" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}">
         </div>
 
 

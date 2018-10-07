@@ -1,5 +1,8 @@
 <?php
 
+//Home
+Route::get('/home', 'UsersController@checkRole');
+
 //Register
 Route::get('/register', 'RegistrationController@index');
 Route::post('/register/admin', 'RegistrationController@storeAdmin');

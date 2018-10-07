@@ -14,6 +14,7 @@
     <a class="active" href="/manager/createLeaveType">Register Leave Type</a>
     <a href="/manager/updateLeaveType">Update Leave Type</a>
     <a href="/logout">Logout</a>
+    <a href="#" class="float-right active" color="#71b346">{{ Auth::user()->username }}</a>
   </div>
 @endsection
 

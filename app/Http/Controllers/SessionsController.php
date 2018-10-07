@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Illuminate\Foundation\Console\Presets\React;
+use App\Session;
 use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SessionsController extends Controller
 {
@@ -21,65 +21,99 @@ class SessionsController extends Controller
 
     public function storeAdminSession()
     {
-        $this->validate(request(), [
-            'username' => 'required|exists:admins,user_username',
-            'password' => 'required|min:6'
-        ]);
-
-        // Attempt user authentication
-        if (! auth()->attempt(request(['username', 'password']))) {
-            redirect('login')->withErrors([
-                'message' => 'Please check your credentials and try again'
+        try {
+            $this->validate(request(), [
+                'username' => 'required|exists:admins,user_username',
+                'password' => 'required|min:6',
             ]);
+
+            // Attempt user authentication
+            if (!auth()->attempt(request(['username', 'password']), request('remember'))) {
+                redirect('login')->withErrors([
+                    'message' => 'Please check your credentials and try again',
+                ]);
+            }
+
+
+        } catch (ModelNotFoundException $exception) {
+            return back()->withError($exception->getMessage())->withInput();
         }
 
-    	// If so sign them in
-    	//redirect to the dashboard
+        if(Auth::user() == null)
+        {
+            Session::swapping(Auth::user());
+        }
+        // If so sign them in
+        //redirect to the dashboard
         return redirect('admin');
     }
 
     public function storeEmployeeSession()
     {
-        $this->validate(request(), [
-            'username' => 'required|exists:employees,user_username',
-            'password' => 'required|min:6'
-        ]);
-
-        // Attempt user authentication
-        if (!auth()->attempt(request(['username', 'password']))) {
-            redirect('login')->withErrors([
-                'message' => 'Please check your credentials and try again'
+        try {
+            $this->validate(request(), [
+                'username' => 'required|exists:employees,user_username',
+                'password' => 'required|min:6',
             ]);
+
+            // Attempt user authentication
+            if (!auth()->attempt(request(['username', 'password']), request('remember'))) {
+                redirect('login')->withErrors([
+                    'message' => 'Please check your credentials and try again',
+                ]);
+            }
+
+
+        } catch (ModelNotFoundException $exception) {
+            return back()->withError($exception->getMessage())->withInput();
         }
 
-    	// If so sign them in
-    	//redirect to the dashboard
+        if(Auth::user() == null)
+        {
+            Session::swapping(Auth::user());
+        }
+        // If so sign them in
+        //redirect to the dashboard
         return redirect('employee');
     }
 
-    public function storeManagerSession(Request $request)
+    public function storeManagerSession()
     {
-        $this->validate(request(), [
-            'username' => 'required|exists:managers,user_username',
-            'password' => 'required|min:6'
-        ]);
-
-        // Attempt user authentication
-        if (! auth()->attempt(request(['username', 'password']))) {
-            redirect('login')->withErrors([
-                'message' => 'Please check your credentials and try again'
+        try {
+            $this->validate(request(), [
+                'username' => 'required|exists:managers,user_username',
+                'password' => 'required|min:6',
             ]);
+
+            // Attempt user authentication
+            if (!auth()->attempt(request(['username', 'password']), request('remember'))) {
+                redirect('login')->withErrors([
+                    'message' => 'Please check your credentials and try again',
+                ]);
+            }
+
+
+        } catch (ModelNotFoundException $exception) {
+            return back()->withError($exception->getMessage())->withInput();
         }
 
-    	// If so sign them in
-    	//redirect to the dashboard
+        if(Auth::user() == null)
+        {
+            Session::swapping(Auth::user());
+        }
+        // If so sign them in
+        //redirect to the dashboard
         return redirect('manager');
     }
 
     public function destroy()
     {
-        auth()->logout();
+        try {
+            Auth::logout();
 
+        } catch (ModelNotFoundException $exception) {
+            return back()->withError($exception->getMessage())->withInput();
+        }
         return redirect('/login');
     }
 }

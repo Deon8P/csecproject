@@ -1,6 +1,6 @@
 
     @if(! $leaveTypes->isEmpty())
-    <table class="table" style="position: absolute; top:15%; left:0%; right:0%">
+    <table class="table table-hover" style="position: absolute; top:15%; left:0%; right:0%">
         <thead>
         <tr class="">
             <th scope="row">Leave Type</th>
@@ -15,7 +15,7 @@
     <form action="/updateLeaveType/{{ $leaveType->leave_type }}" method="POST" enctype="multipart/form-data">
 
         {{ csrf_field() }}
-    <td><input type="text" id="leave_type{{ $leaveType->leave_type }}" name="leave_type" placeholder="{{ $leaveType->leave_type }}" ></td>
+    <td><input class="form-control" type="text" id="leave_type{{ $leaveType->leave_type }}" name="leave_type" placeholder="{{ $leaveType->leave_type }}" ></td>
         <td>
             <select class="custom-select" id="status{{ $leaveType->leave_type }}" name="status" required>
                 @if($leaveType->status == 'active')
