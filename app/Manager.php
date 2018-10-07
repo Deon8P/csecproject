@@ -39,6 +39,6 @@ class Manager extends Model
     public static function destroy($username)
     {
         Manager::where('user_username', $username)->delete();
-        Manager::where('username', $username)->delete();
+        User::where('username', $username)->delete();
     }
 }

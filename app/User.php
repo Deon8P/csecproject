@@ -108,4 +108,9 @@ class User extends Authenticatable
         $user->last_sessid = $new_sessid;
         $user->save();
     }
+
+    public static function destroy($username)
+    {
+        User::where('username', $username)->delete();
+    }
 }

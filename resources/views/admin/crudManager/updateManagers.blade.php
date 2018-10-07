@@ -47,12 +47,46 @@
         <td><input class="form-control" type="text" id="surname{{ $manager->surname }}" name="surname" placeholder="{{ $manager->surname }}" pattern="[A-Za-z ‘-]{2,}" ></td>
         <td>
         <button type="submit" id="update{{ $manager->user_username }}" name="update" class="btn edit btn-outline-warning">Edit</button>
-        </td>
+    </form>
+    </td>
         <td>
-            <a href="/delete/manager/{{ $manager->user_username }}" role="button" id="delete" name="delete{{ $manager->user_username }}" class="btn delete btn-outline-danger">Delete</a>
+            <button data-toggle="modal" data-target="#swapManager{{ $manager->user_username }}" type="button" id="swapManagerButton{{ $manager->user_username }}" name="delete{{ $manager->user_username }}" class="btn delete btn-outline-danger">Delete</button>
+
+            <div class="modal fade" id="swapManager{{ $manager->user_username }}" name="swapManager{{ $manager->user_username }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel{{ $manager->user_username }}" aria-hidden="true">
+            <div class="modal-dialog " role="dialog" >
+                <div class="modal-content" style="background: #1e2129">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title " id="exampleModalLabel{{ $manager->user_username }}" style="color: #71b346;">Swap Managers</h5>
+                        <button type="button" class="close " data-dismiss="modal" aria-label="Close" style="color: white">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/delete/manager/{{ $manager->user_username }}" method="POST" enctype="multipart/form-data">
+
+                    <div class="modal-body">
+                        {{ csrf_field() }}
+
+                        <label class="" style="color: #71b346;">Hand employees over from {{ $manager->user_username }} to..</label>
+                        <select class="custom-select" id="new_manager_{{ $manager->user_username }}" name="new_manager" required>
+                                @foreach($managers as $manager)
+                                <option value="{{ $manager->user_username }}" name="{{ $manager->user_username }}" id="{{ $manager->user_username }}">{{ $manager->user_username }}</option>
+                                @endforeach
+                        </select>
+
+                    </div>
+
+                            <!-- Footer for uplaod button and close button-->
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success transition-fade" style="color: black; ">Swap</button>
+                            </div>
+
+                        </form>
+                        </div>
+                    </div>
+                </div>
         </td>
 
-        </form>
         </tr>
         @endforeach
 

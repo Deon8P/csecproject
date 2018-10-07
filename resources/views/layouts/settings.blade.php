@@ -25,8 +25,6 @@
 
     </ul>
 
-        @include('layouts.errors')
-
       <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-admin" role="tabpanel" aria-labelledby="pills-admin-tab">@include('layouts.changeUsername')</div>
         <div class="tab-pane fade show" id="pills-manager" role="tabpanel" aria-labelledby="pills-manager-tab">@include('layouts.changeEmail')</div>

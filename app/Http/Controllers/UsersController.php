@@ -36,19 +36,9 @@ class UsersController extends Controller
         return back();
     }
 
-    public function read(User $username)
+    public function read($username)
     {
         return User::where('username', $username)->get();
-    }
-
-    public function destroy(User $username)
-    {
-        try {
-            Manager::where('username', $username)->delete();
-
-        } catch (ModelNotFoundException $exception) {
-            return back()->withError($exception->getMessage())->withInput();
-        }
     }
 
     public function checkRole()

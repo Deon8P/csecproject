@@ -18,24 +18,28 @@ Route::post('/login/manager', 'SessionsController@storeManagerSession');
 Route::post('/login/employee', 'SessionsController@storeEmployeeSession');
 Route::get('/logout', 'SessionsController@destroy');
 
-//Admin
+//Admin->Managers
 Route::get('/admin', 'AdminsController@index')->name('admin');
 Route::get('/admin/register/manager', 'AdminsController@createManager');
-Route::get('/admin/register/employee', 'AdminsController@createEmployee');
 Route::post('/register/manager', 'RegistrationController@storeManager');
-Route::post('/register/employee', 'RegistrationController@storeEmployee');
 Route::get('/admin/update/managers', 'AdminsController@updateManagers');
-Route::get('/admin/update/employees', 'AdminsController@updateEmployees');
 Route::post('/update/manager/{username}', 'AdminsController@updateManager');
+Route::post('/delete/manager/{username}', 'AdminsController@destroyManager');
+
+//Admin->Employees
+Route::get('/admin/register/employee', 'AdminsController@createEmployee');
+Route::post('/register/employee', 'RegistrationController@storeEmployee');
+Route::get('/admin/update/employees', 'AdminsController@updateEmployees');
 Route::post('/update/employee/{username}', 'AdminsController@updateEmployee');
-Route::get('/delete/manager/{username}', 'AdminsController@destroyManager');
 Route::get('/delete/employee/{username}', 'AdminsController@destroyEmployee');
+
+//Admin->LeaveTypes
 Route::get('/admin/createLeaveType', 'LeavesController@createLeaveType');
 Route::post('/createLeaveType', 'LeavesController@storeLeaveType');
 Route::get('/admin/updateLeaveType', 'LeavesController@updateLeaveTypeForm');
-Route::get('/admin/reloadLeaveTypes', 'LeavesController@reloadLeaveTypes');
 Route::post('/updateLeaveType/{type}', 'LeavesController@updateLeaveType');
 Route::get('/deleteLeaveType/{type}', 'LeavesController@destroyLeaveType');
+Route::get('/admin/reloadLeaveTypes', 'LeavesController@reloadLeaveTypes');
 
 //Manager
 Route::get('/manager','ManagersController@index')->name('manager');

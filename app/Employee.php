@@ -28,7 +28,7 @@ class Employee extends Model
 
     public static function updateManagedBy($username, $managed_by)
     {
-        Employee::where('user_username', $username)->update(['managed_by' => $managed_by]);
+        Employee::where('managed_by', $username)->update(['managed_by' => $managed_by]);
     }
 
     public static function updateLeaveBalance($username, $leave_balance)

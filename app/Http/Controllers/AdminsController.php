@@ -191,7 +191,15 @@ class AdminsController extends Controller
 
             if (User::role() == 1) {
                 try {
-                    Manager::destroy($username);
+
+                    if($username == request('new_manager'))
+                    {
+                        return back()->with('status', 'You cannot swap the manager with it self.');
+                    }
+                    Employee::updateManagedBy($username, request('new_manager'));
+
+                    User::destroy($username);
+
                 } catch (ModelNotFoundException $exception) {
                     return back()->withError($exception->getMessage())->withInput();
                 }

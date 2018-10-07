@@ -122,9 +122,7 @@ class SessionsController extends Controller
     }
 
     public function destroy()
-    {if (Auth::check()) {
-        $role = User::role();
-        if ($role == 1 || $role == 2 || $role == 3) {
+    {
             try {
                 Auth::logout();
 
@@ -132,9 +130,6 @@ class SessionsController extends Controller
                 return back()->withError($exception->getMessage())->withInput();
             }
             return redirect('/login');
-        }else{
-            return back()->with('status', 'You do not have permission to acess that!');
-        }
     }
-    }
+
 }

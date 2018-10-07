@@ -44,7 +44,7 @@ class ManagersController extends Controller
                 }
                 return view('manager.applicationHistory', compact('applications'));
             }else{
-                return back()->with('status', 'You do not have permission to acess that!');
+                return back()->with('status', 'You do not have permission to access that!');
             }
         }
     }
