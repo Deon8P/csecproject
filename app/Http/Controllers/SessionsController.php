@@ -25,7 +25,7 @@ class SessionsController extends Controller
             $this->validate(request(), [
                 'username' => 'required|exists:admins,user_username',
                 'password' => 'required|min:6',
-                'captcha' => 'required|captcha'
+                //'captcha' => 'required|captcha'
             ]);
 
             // Attempt user authentication
@@ -60,7 +60,7 @@ class SessionsController extends Controller
             $this->validate(request(), [
                 'username' => 'required|exists:employees,user_username',
                 'password' => 'required|min:6',
-                'captcha' => 'required|captcha'
+                //'captcha' => 'required|captcha'
             ]);
 
             // Attempt user authentication
@@ -95,7 +95,7 @@ class SessionsController extends Controller
             $this->validate(request(), [
                 'username' => 'required|exists:managers,user_username',
                 'password' => 'required|min:6',
-                'captcha' => 'required|captcha'
+                //'captcha' => 'required|captcha'
             ]);
 
             // Attempt user authentication
