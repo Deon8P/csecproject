@@ -12,6 +12,32 @@
             <input type="password" class="form-control" id="password" name="password" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}">
             <label style="color: #71b346"><input id="rememberEmployee" name="remember" value="true" type="checkbox" /> &nbsp;Remember me</label>
         </div>
+    <span id="imgCaptcha">{{!! captcha_img() !!}}</span>
+
+    <button type="button" class="btn btn-success"><i class="fa fa-refresh" id="refresh" onclick="refreshcaptcha()"></i></button>
+    <script type="text/javascript">
+        function refreshcaptcha() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+               document.getElementById("imgCaptcha").innerHTML = this.responseText;
+              }
+            };
+            xhttp.open("GET", "/refreshcaptcha", true);
+            xhttp.send();
+          }/*
+        $('#refresh').click(function(){
+          $.ajax({
+             type:'GET',
+             url:'/refreshcaptcha',
+             success:function(data){
+                $(".captcha span").html(data.captcha);
+             }
+          });
+        });*/
+        </script>
+    <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha">
+
 
         <!--Sign In Button -->
         <div class="form-sr mt-3">

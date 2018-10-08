@@ -17,6 +17,10 @@ Route::post('/login/admin', 'SessionsController@storeAdminSession');
 Route::post('/login/manager', 'SessionsController@storeManagerSession');
 Route::post('/login/employee', 'SessionsController@storeEmployeeSession');
 Route::get('/logout', 'SessionsController@destroy');
+//Captcha
+Route::get('createcaptcha', 'CaptchaController@create');
+Route::post('captcha', 'CaptchaController@captchaValidate');
+Route::get('refreshcaptcha', 'CaptchaController@refreshCaptcha');
 
 //Admin->Managers
 Route::get('/admin', 'AdminsController@index')->name('admin');
